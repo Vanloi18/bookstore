@@ -1,20 +1,23 @@
 package com.mybookstore.bookstore.model;
 
-public class CartItem {
+public class OrderDetail {
     private int id;
-    private int cartId;
+    private int orderId;
     private int bookId;
     private int quantity;
+    private double pricePerUnit;
 
-    public CartItem() {}
+    public OrderDetail() {}
 
     // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
-    public int getCartId() { return cartId; }
-    public void setCartId(int cartId) { this.cartId = cartId; }
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
     public int getBookId() { return bookId; }
     public void setBookId(int bookId) { this.bookId = bookId; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
+    public double getPricePerUnit() { return pricePerUnit; }
+    public void setPricePerUnit(double pricePerUnit) { this.pricePerUnit = pricePerUnit; }
 }
