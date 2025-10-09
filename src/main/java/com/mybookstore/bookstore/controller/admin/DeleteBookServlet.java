@@ -1,18 +1,15 @@
 package com.mybookstore.bookstore.controller.admin;
 
 import com.mybookstore.bookstore.dao.BookDAO;
-import com.mybookstore.bookstore.model.Book;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/admin/manage-books")
-public class ManageBooksServlet extends HttpServlet {
+@WebServlet("/admin/delete-book")
+public class DeleteBookServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private BookDAO bookDAO;
 
@@ -21,8 +18,12 @@ public class ManageBooksServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> bookList = bookDAO.getAllBooks();
-        request.setAttribute("bookList", bookList);
-        request.getRequestDispatcher("/admin/manage-books.jsp").forward(request, response);
+        try {
+            int bookId = Integer.parseInt(request.getParameter("id"));
+            bookDAO.deleteBook(bookId);
+        } catch (NumberFormatException e) {
+            // Bỏ qua nếu id không hợp lệ
+        }
+        response.sendRedirect(request.getContextPath() + "/admin/manage-books");
     }
 }

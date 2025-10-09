@@ -1,7 +1,7 @@
 package com.mybookstore.bookstore.controller.admin;
 
-import com.mybookstore.bookstore.dao.BookDAO;
-import com.mybookstore.bookstore.model.Book;
+import com.mybookstore.bookstore.dao.OrderDAO;
+import com.mybookstore.bookstore.model.Order;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,18 +11,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/manage-books")
-public class ManageBooksServlet extends HttpServlet {
+@WebServlet("/admin/manage-orders")
+public class ManageOrdersServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private BookDAO bookDAO;
+    private OrderDAO orderDAO;
 
     public void init() {
-        bookDAO = new BookDAO();
+        orderDAO = new OrderDAO();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> bookList = bookDAO.getAllBooks();
-        request.setAttribute("bookList", bookList);
-        request.getRequestDispatcher("/admin/manage-books.jsp").forward(request, response);
+        List<Order> orderList = orderDAO.getAllOrders();
+        request.setAttribute("orderList", orderList);
+        request.getRequestDispatcher("/admin/manage-orders.jsp").forward(request, response);
     }
 }

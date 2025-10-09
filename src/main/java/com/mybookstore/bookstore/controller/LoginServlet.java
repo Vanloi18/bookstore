@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loggedInUser", user);
             
             // Chuyển hướng đến trang chủ
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("home");
         } else {
             // Đăng nhập thất bại, gửi lỗi về trang login.jsp
             request.setAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không đúng!");
