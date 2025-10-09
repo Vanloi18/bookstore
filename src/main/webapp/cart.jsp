@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Giỏ Hàng của bạn</title>
-<style>
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-    .quantity-input { width: 50px; text-align: center; }
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-<%-- Phần header chứa thông tin đăng nhập/đăng xuất được tách ra file riêng --%>
-	<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp" />
+
+<div class="container">
     <h1>Giỏ Hàng</h1>
     <hr>
     
@@ -42,16 +40,15 @@
                     <c:set var="item" value="${entry.value}" />
                     <tr>
                         <td>${item.book.title}</td>
-                        <td>${item.book.price} VNĐ</td>
+                        <td><fmt:formatNumber type="number" value="${item.book.price}" /> VNĐ</td>
                         <td>
-                            <%-- Form nhỏ để cập nhật số lượng cho từng sản phẩm --%>
-                            <form action="update-cart" method="post" style="display:inline;">
+                            <form action="update-cart" method="post" style="display:flex; align-items: center; gap: 10px;">
                                 <input type="hidden" name="bookId" value="${item.book.id}">
                                 <input type="number" name="quantity" class="quantity-input" value="${item.quantity}" min="0">
                                 <button type="submit">Cập nhật</button>
                             </form>
                         </td>
-                        <td>${item.subtotal} VNĐ</td>
+                        <td><fmt:formatNumber type="number" value="${item.subtotal}" /> VNĐ</td>
                         <td><a href="remove-from-cart?id=${item.book.id}">Xóa</a></td>
                     </tr>
                     <c:set var="totalAmount" value="${totalAmount + item.subtotal}" />
@@ -59,12 +56,14 @@
                 
                 <tr>
                     <td colspan="3" style="text-align:right;"><strong>Tổng cộng:</strong></td>
-                    <td colspan="2"><strong>${totalAmount} VNĐ</strong></td>
+                    <td colspan="2"><strong><fmt:formatNumber type="number" value="${totalAmount}" /> VNĐ</strong></td>
                 </tr>
             </table>
         </form>
         <br>
         <a href="home">Tiếp tục mua sắm</a> | <a href="checkout.jsp">Thanh toán</a>
     </c:if>
+</div>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

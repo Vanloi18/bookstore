@@ -89,6 +89,20 @@ public class BookDAO {
 		return books;
 	}
 
+	public int countBooks() {
+        String sql = "SELECT COUNT(*) FROM books";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+	
 	// Thêm sách mới
 	public void addBook(Book book) {
 		String sql = "INSERT INTO books (title, author, price, stock, publicationYear, description, coverImage, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

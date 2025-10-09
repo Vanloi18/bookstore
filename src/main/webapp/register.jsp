@@ -1,54 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Đăng Ký Tài Khoản</title>
+    <meta charset="UTF-8">
+    <title>Đăng Ký Tài Khoản</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-    <h2>Tạo tài khoản mới</h2>
+    <jsp:include page="header.jsp" />
     
-    <%-- Hiển thị thông báo lỗi nếu có --%>
-    <% 
-        String errorMessage = (String) request.getAttribute("errorMessage");
-        if (errorMessage != null) { 
-    %>
-        <p style="color:red;"><%= errorMessage %></p>
-    <% 
-        } 
-    %>
+    <div class="form-container">
+        <h2>Tạo tài khoản mới</h2>
+        
+        <c:if test="${not empty errorMessage}">
+            <p class="error-message">${errorMessage}</p>
+        </c:if>
 
-    <form action="register" method="post">
-        <table>
-            <tr>
-                <td>Tên đăng nhập:</td>
-                <td><input type="text" name="username" required></td>
-            </tr>
-            <tr>
-                <td>Mật khẩu:</td>
-                <td><input type="password" name="password" required></td>
-            </tr>
-            <tr>
-                <td>Họ và tên:</td>
-                <td><input type="text" name="fullname"></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="email" name="email" required></td>
-            </tr>
-            <tr>
-                <td>Địa chỉ:</td>
-                <td><input type="text" name="address"></td>
-            </tr>
-            <tr>
-                <td>Số điện thoại:</td>
-                <td><input type="text" name="phone"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Đăng Ký"></td>
-            </tr>
-        </table>
-    </form>
-    <p>Đã có tài khoản? <a href="login.jsp">Đăng nhập ngay</a></p>
+        <form action="register" method="post">
+            <div class="form-group">
+                <label for="username">Tên đăng nhập:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Họ và tên:</label>
+                <input type="text" id="fullname" name="fullname">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ:</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <p style="margin-top: 20px;">Đã có tài khoản? <a href="login.jsp">Đăng nhập ngay</a></p>
+    </div>
+    <jsp:include page="footer.jsp" />
 </body>
 </html>

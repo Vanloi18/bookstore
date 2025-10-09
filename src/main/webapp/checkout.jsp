@@ -56,5 +56,6 @@
             <button type="submit">Đặt Hàng</button>
         </form>
     </c:if>
+    <jsp:include page="footer.jsp" />
 </body>
 </html>

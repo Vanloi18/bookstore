@@ -1,5 +1,9 @@
 package com.mybookstore.bookstore.controller.admin;
 
+import com.mybookstore.bookstore.dao.BookDAO;
+import com.mybookstore.bookstore.dao.OrderDAO;
+import com.mybookstore.bookstore.dao.UserDAO;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,35 +11,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class AdminDashboardServlet
- */
-@WebServlet("/AdminDashboardServlet")
+@WebServlet("/admin/dashboard")
 public class AdminDashboardServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminDashboardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+    private BookDAO bookDAO;
+    private OrderDAO orderDAO;
+    private UserDAO userDAO;
+
+    public void init() {
+        bookDAO = new BookDAO();
+        orderDAO = new OrderDAO();
+        userDAO = new UserDAO();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookCount = bookDAO.countBooks();
+        int orderCount = orderDAO.countOrders();
+        int userCount = userDAO.countUsers();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        request.setAttribute("bookCount", bookCount);
+        request.setAttribute("orderCount", orderCount);
+        request.setAttribute("userCount", userCount);
 
+        request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
+    }
 }

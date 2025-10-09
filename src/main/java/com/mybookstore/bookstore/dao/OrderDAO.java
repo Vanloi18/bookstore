@@ -43,7 +43,21 @@ public class OrderDAO {
 		}
 		return generatedOrderId;
 	}
-
+	
+	public int countOrders() {
+        String sql = "SELECT COUNT(*) FROM orders";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+	
 	public List<Order> getAllOrders() {
 		List<Order> orderList = new ArrayList<>();
 		// Sắp xếp đơn hàng mới nhất lên đầu
