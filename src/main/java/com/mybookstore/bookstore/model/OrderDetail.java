@@ -6,7 +6,7 @@ public class OrderDetail {
     private int bookId;
     private int quantity;
     private double pricePerUnit;
-
+    private Book book;
     public OrderDetail() {}
 
     // Getters and Setters
@@ -20,4 +20,7 @@ public class OrderDetail {
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public double getPricePerUnit() { return pricePerUnit; }
     public void setPricePerUnit(double pricePerUnit) { this.pricePerUnit = pricePerUnit; }
+    
+    public Book getBook() { return book; }
+    public void setBook(Book book) { this.book = book; }
 }

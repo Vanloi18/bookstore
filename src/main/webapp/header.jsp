@@ -14,6 +14,8 @@
         <c:if test="${not empty loggedInUser}">
             <span>Xin chào, <strong>${loggedInUser.fullname}</strong>!</span> &nbsp;|&nbsp;
             
+            <a href="${pageContext.request.contextPath}/order-history">Lịch sử mua hàng</a> &nbsp;|&nbsp;
+           
             <%-- Nếu là admin thì hiển thị link trang quản trị --%>
             <c:if test="${loggedInUser.isAdmin()}">
                 <a href="${pageContext.request.contextPath}/admin/manage-books"><strong>Trang Quản Trị</strong></a> &nbsp;|&nbsp;

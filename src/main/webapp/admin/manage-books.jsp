@@ -27,7 +27,9 @@ th {
 </head>
 <body>
 	<h1>Trang Quản Trị - Quản lý Sách</h1>
-	<p><a href="${pageContext.request.contextPath}/admin/manage-orders">Quản lý đơn hàng</a></p>
+	<p><a href="${pageContext.request.contextPath}/admin/manage-orders">Quản lý đơn hàng</a> | 
+       <a href="${pageContext.request.contextPath}/admin/manage-categories">Quản lý thể loại</a>
+    </p>
 	<p>
 		<a href="${pageContext.request.contextPath}/home">Quay lại trang chủ</a>
 	</p>
