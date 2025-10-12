@@ -9,18 +9,28 @@
     <meta charset="UTF-8">
     <title>Quản Lý Sách</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    
 </head>
 <body>
     <div class="container admin-container">
-        <header class="admin-header">
-    <h1>Trang Quản Trị</h1>
-    <nav class="admin-nav">
-        <a href="${pageContext.request.contextPath}/admin/dashboard">Bảng điều khiển</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-books" class="active">Quản lý sách</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-categories">Quản lý thể loại</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-orders">Quản lý đơn hàng</a>
-        <a href="${pageContext.request.contextPath}/home">Về trang chủ</a>
+        <header class="main-header">
+    <div class="logo-section">
+        <a href="${pageContext.request.contextPath}/home" class="logo-text">
+        <span class="b-part">Book</span><span class="s-part">Store</span>
+            <img src="${pageContext.request.contextPath}/images/logo_icon.jpg" alt="icon" class="logo-icon">
+        </a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="${pageContext.request.contextPath}/admin/dashboard">🧑‍💻TRANG ADMIN</a>
+        <a href="${pageContext.request.contextPath}/admin/manage-books">📚 QUẢN LÝ SÁCH</a>
+        <a href="${pageContext.request.contextPath}/admin/manage-categories">🏷️ QUẢN LÝ THỂ LOẠI</a>
+        <a href="${pageContext.request.contextPath}/admin/manage-orders">🛒 QUẢN LÝ ĐƠN HÀNG</a>
+        <a href="${pageContext.request.contextPath}/home">🏠Trang chủ</a>
     </nav>
+
 </header>
 
         <main>

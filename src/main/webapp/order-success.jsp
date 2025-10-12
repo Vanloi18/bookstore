@@ -11,11 +11,17 @@
 
     <div class="container">
         <div class="order-success-container">
-            <h1>Cảm ơn bạn đã đặt hàng!</h1>
-            <p>Đơn hàng của bạn đã được ghi nhận và đang chờ xử lý. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
-            <a href="${pageContext.request.contextPath}/home" class="btn">Quay lại trang chủ</a>
+            <h1>🎉 Cảm ơn bạn đã đặt hàng!</h1>
+            <p>Đơn hàng của bạn đã được ghi nhận và đang chờ xử lý.</p>
+            <p>Shipper đang trên đường giao hàng cho bạn 🚴‍♂️💨</p>
+
+          
+
+
+            <a href="${pageContext.request.contextPath}/home" class="btn">🏠 Quay lại trang chủ</a>
         </div>
     </div>
+
     <jsp:include page="footer.jsp" />
 </body>
 </html>
