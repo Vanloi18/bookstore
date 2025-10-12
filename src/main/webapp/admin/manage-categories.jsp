@@ -13,22 +13,10 @@
 </head>
 <body>
     <div class="container admin-container">
-        <header class="main-header">
-    <div class="logo-section">
-        <a href="${pageContext.request.contextPath}/home" class="logo-text">
-        <span class="b-part">Book</span><span class="s-part">Store</span>
-            <img src="${pageContext.request.contextPath}/images/logo_icon.jpg" alt="icon" class="logo-icon">
-        </a>
-    </div>
-
-    <nav class="nav-links">
-        <a href="${pageContext.request.contextPath}/admin/dashboard">🧑‍💻TRANG ADMIN</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-books">📚 QUẢN LÝ SÁCH</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-categories">🏷️ QUẢN LÝ THỂ LOẠI</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-orders">🛒 QUẢN LÝ ĐƠN HÀNG</a>
-        <a href="${pageContext.request.contextPath}/home">🏠Trang chủ</a>
-    </nav>
-</header>
+        <%-- ✅ DÒNG LỆNH NHÚNG HEADER VÀO --%>
+         <jsp:include page="header.jsp">
+    <jsp:param name="currentPage" value="categories"/>
+</jsp:include>
 
         <main>
             <div class="add-form-container">
