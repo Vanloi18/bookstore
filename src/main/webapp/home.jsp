@@ -9,13 +9,13 @@
     <title>Trang Chủ - Nhà Sách Online</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
+<br>
+<br>
 <body>
     <jsp:include page="header.jsp" />
 
     <div class="container">
-        <h1>Chào mừng đến với Nhà Sách Online</h1>
-        <hr style="margin: 20px 0;">
-
+ 
         <div class="main-container">
             <aside class="sidebar">
                 <h3>Thể loại</h3>
@@ -33,7 +33,7 @@
                     <button type="submit">Tìm kiếm</button>
                 </form>
                 
-                <h2>Danh sách sách</h2>
+           
                 <div class="book-list">
                     <c:forEach items="${bookList}" var="book">
                         <div class="book-item">

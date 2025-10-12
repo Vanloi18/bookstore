@@ -61,7 +61,11 @@
             </table>
         </form>
         <br>
-        <a href="home">Tiếp tục mua sắm</a> | <a href="checkout.jsp">Thanh toán</a>
+        <div class="cart-actions">
+    <a href="home" class="btn-continue">🛒 Tiếp tục mua sắm</a>
+    <a href="checkout.jsp" class="btn-checkout">💳 Thanh toán</a>
+</div>
+
     </c:if>
 </div>
 <jsp:include page="footer.jsp" />
