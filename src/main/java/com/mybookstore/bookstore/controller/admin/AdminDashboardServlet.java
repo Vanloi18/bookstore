@@ -33,6 +33,6 @@ public class AdminDashboardServlet extends HttpServlet {
         request.setAttribute("orderCount", orderCount);
         request.setAttribute("userCount", userCount);
 
-        request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
-    }
+		request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
+	}
 }

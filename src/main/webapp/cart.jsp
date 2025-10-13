@@ -11,7 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp">
+        <jsp:param name="currentPage" value="cart"/>
+    </jsp:include>
 
 <div class="container">
     <h1>Giỏ Hàng</h1>

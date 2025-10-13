@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-    <jsp:include page="header.jsp" />
+    <jsp:include page="header.jsp">
+        <jsp:param name="currentPage" value="order-history"/>
+    </jsp:include>
     
     <div class="container">
         <h1>Lịch sử đơn hàng của bạn</h1>

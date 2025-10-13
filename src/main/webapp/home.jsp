@@ -36,13 +36,13 @@
            
                 <div class="book-list">
                     <c:forEach items="${bookList}" var="book">
-                        <div class="book-item">
+                        <a href="product-detail?id=${book.id}" class="detail-btn"><div class="book-item">
                             <img src="${pageContext.request.contextPath}/${book.coverImage}" alt="${book.title}">
                             <h4>${book.title}</h4>
                             <p>Tác giả: ${book.author}</p>
                             <p class="price"><fmt:formatNumber type="number" value="${book.price}" /> VNĐ</p>
-                            <a href="product-detail?id=${book.id}" class="detail-btn">Xem chi tiết</a>
                         </div>
+                        </a>
                     </c:forEach>
                     <c:if test="${empty bookList}">
                         <p>Không tìm thấy sản phẩm nào phù hợp.</p>

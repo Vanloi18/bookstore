@@ -209,6 +209,15 @@ tbody tr:nth-child(even) {
     text-decoration: none;
     border-radius: 5px;
 }
+/* Áp dụng cho class .detail-btn ở mọi trạng thái */
+.detail-btn,
+.detail-btn:link,
+.detail-btn:visited,
+.detail-btn:hover,
+.detail-btn:active {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: inherit;        /* Giữ nguyên màu chữ gốc */
+}
 .book-item .detail-btn:hover {
     background: #0056b3;
     text-decoration: none;
@@ -463,7 +472,12 @@ tbody tr:nth-child(even) {
     font-family: 'Poppins', 'Segoe UI', sans-serif;
     font-size: 32px;
 }
-
+.logo-text,
+.logo-text:hover,
+.logo-text:visited,
+.logo-text:active {
+    text-decoration: none;
+}
 /* Hai phần chữ khác màu */
 .b-part {
     color: #e60000; /* đỏ */

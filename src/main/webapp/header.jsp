@@ -5,7 +5,12 @@
     <link rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
+	<style>
+        nav a.active {
+            color: #ffb703; /* Hoặc màu bạn thích */
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 
@@ -25,18 +30,17 @@
         <%-- Nếu người dùng đã đăng nhập --%>
         <c:if test="${not empty loggedInUser}">
             <span>Xin chào, <strong>${loggedInUser.fullname}</strong>!</span>
-            <a href="${pageContext.request.contextPath}/order-history">Lịch sử mua hàng</a>
-           
-            <c:if test="${loggedInUser.isAdmin()}">
-                <a href="${pageContext.request.contextPath}/admin/manage-books">Trang quản trị</a>
-            </c:if>
- <!-- Icon giỏ hàng -->
-            <a href="${pageContext.request.contextPath}/cart.jsp" class="cart-icon">
+            <a href="${pageContext.request.contextPath}/order-history" class="${param.currentPage == 'order-history' ? 'active' : ''}">Lịch sử mua hàng</a>
+           	<!-- Icon giỏ hàng -->
+            <a href="${pageContext.request.contextPath}/cart.jsp" class="cart-icon ${param.currentPage == 'cart' ? 'active' : ''}">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <c:if test="${not empty cart}">
                     <span class="cart-count">${cart.size()}</span>
                 </c:if>
             </a>
+            <c:if test="${loggedInUser.isAdmin()}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard">Trang quản trị</a>
+            </c:if>
             <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
         </c:if>
 
