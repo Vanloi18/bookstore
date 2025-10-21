@@ -148,7 +148,7 @@ CREATE TABLE `order_details` (
   KEY `bookId` (`bookId`),
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`),
   CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`bookId`) REFERENCES `books` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (1,1,1,2,89000),(2,2,3,1,120000),(3,2,2,2,75000),(4,3,5,1,180000),(5,3,4,1,150000),(6,4,1,6,89000),(7,5,1,2,89000),(8,6,1,10,89000),(9,7,1,1,89000),(10,7,3,1,120000),(11,7,5,1,180000),(12,8,1,2,89000),(13,9,1,1,89000),(14,10,6,1,250000),(15,10,9,2,180000),(16,10,12,1,280000),(17,11,1,1,89000),(18,11,3,1,120000);
+INSERT INTO `order_details` VALUES (1,1,1,2,89000),(2,2,3,1,120000),(3,2,2,2,75000),(4,3,5,1,180000),(5,3,4,1,150000),(6,4,1,6,89000),(7,5,1,2,89000),(8,6,1,10,89000),(9,7,1,1,89000),(10,7,3,1,120000),(11,7,5,1,180000),(12,8,1,2,89000),(13,9,1,1,89000),(14,10,6,1,250000),(15,10,9,2,180000),(16,10,12,1,280000),(17,11,1,1,89000),(18,11,3,1,120000),(19,12,1,1,89000);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +187,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,2,'2025-10-09 01:56:40',178000,'123 Lê Lợi, Đà Nẵng','Cancelled'),(2,3,'2025-10-09 01:56:40',270000,'45 Nguyễn Huệ, TP.HCM','Cancelled'),(3,4,'2025-10-09 01:56:40',330000,'78 Cầu Giấy, Hà Nội','Cancelled'),(4,1,'2025-10-09 06:12:23',534000,'123 Đường Chính, TP. Sách','Cancelled'),(5,1,'2025-10-09 06:47:49',178000,'123 Đường Chính, TP. Sách','Cancelled'),(6,1,'2025-10-09 06:48:11',890000,'123 Đường Chính, TP. Sách','Cancelled'),(7,2,'2025-10-09 19:11:55',389000,'hehe','Cancelled'),(8,1,'2025-10-09 20:57:07',178000,'123 Đường Chính, TP. Sách','Pending'),(9,1,'2025-10-11 17:47:29',89000,'123 Đường Chính, TP. Sách','Completed'),(10,7,'2025-10-13 07:29:08',890000,'Ha Noi','Pending'),(11,1,'2025-10-13 14:13:12',209000,'123 Đường Chính, TP. Sách','Pending');
+INSERT INTO `orders` VALUES (1,2,'2025-10-09 01:56:40',178000,'123 Lê Lợi, Đà Nẵng','Cancelled'),(2,3,'2025-10-09 01:56:40',270000,'45 Nguyễn Huệ, TP.HCM','Cancelled'),(3,4,'2025-10-09 01:56:40',330000,'78 Cầu Giấy, Hà Nội','Cancelled'),(4,1,'2025-10-09 06:12:23',534000,'123 Đường Chính, TP. Sách','Cancelled'),(5,1,'2025-10-09 06:47:49',178000,'123 Đường Chính, TP. Sách','Cancelled'),(6,1,'2025-10-09 06:48:11',890000,'123 Đường Chính, TP. Sách','Cancelled'),(7,2,'2025-10-09 19:11:55',389000,'hehe','Cancelled'),(8,1,'2025-10-09 20:57:07',178000,'123 Đường Chính, TP. Sách','Pending'),(9,1,'2025-10-11 17:47:29',89000,'123 Đường Chính, TP. Sách','Completed'),(10,7,'2025-10-13 07:29:08',890000,'Ha Noi','Cancelled'),(11,1,'2025-10-13 14:13:12',209000,'123 Đường Chính, TP. Sách','Shipping'),(12,7,'2025-10-13 19:37:25',89000,'Đông Cương ','Completed');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-14  1:16:48
+-- Dump completed on 2025-10-14 23:16:25
