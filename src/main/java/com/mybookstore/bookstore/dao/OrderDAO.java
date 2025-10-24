@@ -5,18 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 public class OrderDAO {
 
-	/**
-	 * Thêm một đơn hàng mới vào CSDL.
-	 * 
-	 * @param order Đối tượng Order chứa thông tin đơn hàng.
-	 * @return ID của đơn hàng vừa được tạo, hoặc -1 nếu có lỗi.
-	 */
 	public int addOrder(Order order) {
 		String sql = "INSERT INTO orders (userId, totalAmount, shippingAddress, status) VALUES (?, ?, ?, ?)";
 		int generatedOrderId = -1;
@@ -83,10 +80,6 @@ public class OrderDAO {
 		return orderList;
 	}
 	
-//	Cập nhật trạng thái của một đơn hàng.
-//	orderId ID của đơn hàng cần cập nhật.
-//	newStatus Trạng thái mới (vd: "Shipping", "Completed", "Cancelled").
-//	true nếu cập nhật thành công, false nếu thất bại.
 	public boolean updateOrderStatus(int orderId, String newStatus) {
 		String sql = "UPDATE orders SET status = ? WHERE id = ?";
 		try (Connection connection = DatabaseConnection.getConnection();
@@ -128,5 +121,89 @@ public class OrderDAO {
             e.printStackTrace();
         }
         return orderList;
+    }
+	
+	/**
+     * Đếm số đơn hàng mới (trạng thái 'Pending').
+     * @return Số lượng đơn hàng mới.
+     */
+    public int countNewOrders() {
+        String sql = "SELECT COUNT(*) FROM orders WHERE status = 'Pending'";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Tính tổng doanh thu trong một khoảng thời gian.
+     * @param startDate Ngày bắt đầu.
+     * @param endDate Ngày kết thúc.
+     * @return Tổng doanh thu.
+     */
+    public double getTotalRevenue(LocalDate startDate, LocalDate endDate) {
+        // Chỉ tính doanh thu từ các đơn hàng đã hoàn thành ('Completed')
+        String sql = "SELECT SUM(totalAmount) FROM orders WHERE status = 'Completed' AND orderDate BETWEEN ? AND ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            // Chuyển LocalDate sang Timestamp (thêm giờ phút giây)
+            ps.setTimestamp(1, java.sql.Timestamp.valueOf(startDate.atStartOfDay()));
+            ps.setTimestamp(2, java.sql.Timestamp.valueOf(endDate.atTime(23, 59, 59))); // Kết thúc ngày
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+    
+    /**
+     * Lấy doanh thu theo từng ngày trong 7 ngày gần nhất.
+     * @return Map với key là ngày (LocalDate) và value là doanh thu ngày đó.
+     */
+    public Map<LocalDate, Double> getDailyRevenueLast7Days() {
+        Map<LocalDate, Double> dailyRevenue = new HashMap<>();
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(6); // 7 ngày tính cả hôm nay
+
+        String sql = "SELECT DATE(orderDate) as order_day, SUM(totalAmount) as daily_total " +
+                     "FROM orders " +
+                     "WHERE status = 'Completed' AND orderDate >= ? " +
+                     "GROUP BY DATE(orderDate) " +
+                     "ORDER BY order_day ASC";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setTimestamp(1, java.sql.Timestamp.valueOf(startDate.atStartOfDay()));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    LocalDate orderDay = rs.getDate("order_day").toLocalDate();
+                    double revenue = rs.getDouble("daily_total");
+                    dailyRevenue.put(orderDay, revenue);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Đảm bảo đủ 7 ngày, ngày nào không có doanh thu thì set là 0
+        for (int i = 0; i < 7; i++) {
+            LocalDate date = startDate.plusDays(i);
+            dailyRevenue.putIfAbsent(date, 0.0);
+        }
+
+        return dailyRevenue;
     }
 }

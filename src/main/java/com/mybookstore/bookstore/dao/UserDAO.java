@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList; // Thêm import
+import java.util.List;    // Thêm import
 
 public class UserDAO {
 
@@ -107,6 +109,100 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+ // Thêm vào UserDAO.java
+    public int countNewUsersToday() {
+        // CURDATE() là hàm của MySQL để lấy ngày hiện tại
+        String sql = "SELECT COUNT(*) FROM users WHERE DATE(registrationDate) = CURDATE()"; 
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Lấy danh sách tất cả người dùng (không bao gồm admin).
+     * @return List các đối tượng User.
+     */
+    public List<User> getAllNonAdminUsers() {
+        List<User> userList = new ArrayList<>();
+        String sql = "SELECT id, username, fullname, email, address, phone, isAdmin, createdAt FROM users WHERE isAdmin = false ORDER BY createdAt DESC";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                User user = mapResultSetToUser(rs);
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    /**
+     * Cập nhật trạng thái admin cho một người dùng.
+     * @param userId ID của người dùng.
+     * @param isAdmin Trạng thái admin mới (true hoặc false).
+     * @return true nếu cập nhật thành công, false nếu thất bại.
+     */
+    public boolean updateUserAdminStatus(int userId, boolean isAdmin) {
+        String sql = "UPDATE users SET isAdmin = ? WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setBoolean(1, isAdmin);
+            ps.setInt(2, userId);
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Xóa một người dùng khỏi CSDL.
+     * (Cẩn thận: Nên xem xét việc "vô hiệu hóa" thay vì xóa hẳn).
+     * @param userId ID của người dùng cần xóa.
+     * @return true nếu xóa thành công, false nếu thất bại.
+     */
+    public boolean deleteUser(int userId) {
+        // Cần xóa các bản ghi liên quan trước (orders, reviews...) hoặc set ON DELETE CASCADE/SET NULL trong CSDL
+        String sql = "DELETE FROM users WHERE id = ? AND isAdmin = false"; // Chỉ xóa user thường
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            // Log lỗi SQLIntegrityConstraintViolationException nếu không xóa được do khóa ngoại
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Helper method để tránh lặp code
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        user.setFullname(rs.getString("fullname"));
+        user.setEmail(rs.getString("email"));
+        user.setAddress(rs.getString("address"));
+        user.setPhone(rs.getString("phone"));
+        user.setAdmin(rs.getBoolean("isAdmin"));
+        user.setCreatedAt(rs.getTimestamp("createdAt"));
+        // Không lấy password
+        return user;
     }
 }
 
