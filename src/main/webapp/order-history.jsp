@@ -42,7 +42,7 @@
                             <c:forEach items="${orderList}" var="order">
                                 <tr>
                                     <td>#${order.id}</td>
-                                    <td><fmt:formatDate value="${order.orderDate}" pattern="dd-MM-yyyy HH:mm"/></td>
+                                    <td><fmt:formatDate value="${order.orderDate}" pattern="dd-MM-yyyy HH:mm" timeZone="Asia/Ho_Chi_Minh"/></td>
                                     <td><fmt:formatNumber type="number" value="${order.totalAmount}" /> VNĐ</td>
                                     <td>${order.shippingAddress}</td>
                                     <td class="order-status ${order.status.toLowerCase().replace(' ','-')}">${order.status}</td>

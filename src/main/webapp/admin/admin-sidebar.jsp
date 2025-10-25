@@ -44,8 +44,8 @@
                 </a>
             </li>
              <li class="${param.activePage == 'settings' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/admin/settings">
-                    <i class="fas fa-cog"></i> Cài đặt
+                <a href="${pageContext.request.contextPath}/home">
+                    <i class="fas fa-cog"></i> Về home
                 </a>
             </li>
         </ul>

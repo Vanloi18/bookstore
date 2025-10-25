@@ -85,8 +85,7 @@
 								<td class="text-secondary">${user.email}</td>
 								<td class="text-address">${user.address}</td>
 								<td class="text-secondary">${user.phone}</td>
-								<td><fmt:formatDate value="${user.createdAt}"
-										pattern="dd-MM-yyyy" /></td>
+								<td><fmt:formatDate value="${order.orderDate}" pattern="dd-MM-yyyy HH:mm" timeZone="Asia/Ho_Chi_Minh"/></td>
 								<td class="role-cell">
 									<form
 										action="${pageContext.request.contextPath}/admin/update-user-role"

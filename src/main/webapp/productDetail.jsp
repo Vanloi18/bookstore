@@ -78,10 +78,7 @@
 								</c:forEach>
 							</div>
 							<p class="comment">${review.comment}</p>
-							<p class="date">
-								<fmt:formatDate value="${review.createdAt}"
-									pattern="dd/MM/yyyy HH:mm" />
-							</p>
+							<p class="date"><fmt:formatDate value="${review.createdAt}" pattern="dd/MM/yyyy HH:mm" timeZone="Asia/Ho_Chi_Minh"/></p>
 						</div>
 					</c:forEach>
 				</c:if>

@@ -82,8 +82,7 @@
 								<tr>
 									<td>#${order.id}</td>
 									<td class="text-secondary">${order.userId}</td>
-									<td><fmt:formatDate value="${order.orderDate}"
-											pattern="dd-MM-yyyy HH:mm" /></td>
+									<td><fmt:formatDate value="${order.orderDate}" pattern="dd-MM-yyyy HH:mm" timeZone="Asia/Ho_Chi_Minh"/></td>
 									<td class="text-price"><fmt:formatNumber type="number"
 											value="${order.totalAmount}" /> VNĐ</td>
 									<td class="text-address">${fn:substring(order.shippingAddress, 0, 50)}...</td>
