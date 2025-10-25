@@ -1,0 +1,126 @@
+/* ================================
+   REGISTER PAGE STYLES
+   ================================ */
+body {
+    background: linear-gradient(to bottom right, #f8f9fa, #eef1f5);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.form-container {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    padding: 45px 40px;
+    max-width: 500px;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.form-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.form-container h2 {
+    margin-bottom: 25px;
+    color: #222;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #0071e3;
+    box-shadow: 0 0 0 3px rgba(0,113,227,0.2);
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background: linear-gradient(135deg, #0071e3, #0096f7);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #005bb5, #0081dc);
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: #d93025;
+    background: #fdecea;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.form-container p {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-container a {
+    color: #0071e3;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+/* Fade-in nhẹ */
+.form-container {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

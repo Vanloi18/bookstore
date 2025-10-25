@@ -1,0 +1,67 @@
+/* ========================================================= */
+/* users.css - CSS riêng cho trang Quản lý Người dùng */
+/* ========================================================= */
+
+.admin-page-content h2 i {
+    color: #495057;
+    margin-right: 10px;
+}
+
+/* Kích hoạt lại Action Bar và Search Filter (dùng chung orders.css) */
+.table-filter-bar {
+    /* Đã được định nghĩa trong orders.css - đảm bảo orders.css được nhúng nếu bạn muốn tái sử dụng */
+}
+
+/* Style cho cột Vai trò (Role Select Box) */
+.role-cell {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.role-update-form {
+    display: inline-block;
+}
+
+.role-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    appearance: none; 
+    transition: all 0.2s ease;
+}
+
+/* Màu sắc động cho Vai trò */
+/* Vai trò User */
+.role-user {
+    background-color: #e9ecef; /* Nền xám nhạt */
+    color: #495057; 
+}
+
+/* Vai trò Admin */
+.role-admin {
+    background-color: var(--color-danger); /* Đỏ nổi bật */
+    color: white; 
+    box-shadow: 0 1px 3px rgba(220, 53, 69, 0.4);
+}
+
+.role-select option {
+    /* Đảm bảo option hiển thị chữ đen */
+    color: #333; 
+    background-color: white; 
+}
+
+/* Responsive (dùng chung từ orders.css) */
+@media (max-width: 768px) {
+    /* Kích hoạt responsive cho action bar */
+    .table-filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-form-inline {
+        width: 100%;
+    }
+}

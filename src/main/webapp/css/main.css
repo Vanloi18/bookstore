@@ -16,6 +16,7 @@
 @import url("components/form.css");
 @import url("components/modal.css");
 @import url("components/book-card.css");
+@import url("components/pagination.css");
 
 /* Pages */
 @import url("pages/home.css");

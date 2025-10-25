@@ -6,10 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng Nhập</title>
-
-    <!-- CSS chung toàn trang -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/footer.css">
     <!-- CSS riêng cho trang đăng nhập -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/login.css">
 </head>

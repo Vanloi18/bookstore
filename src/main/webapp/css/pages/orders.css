@@ -1,0 +1,88 @@
+/* ========================================================= */
+/* orders.css - CSS riêng cho trang Quản lý Đơn hàng */
+/* ========================================================= */
+
+.admin-page-content h2 i {
+    color: #495057;
+    margin-right: 10px;
+}
+
+/* Thanh Lọc/Tìm kiếm */
+.table-filter-bar {
+    display: flex;
+    justify-content: flex-start; /* Dồn về bên trái */
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table-filter-bar .input-search {
+    width: 300px;
+}
+
+.status-select {
+    /* Style chung đã có (padding, border-radius, font-size...) */
+    border: none; /* Bỏ border để Select Box nhìn như một badge */
+    color: white; /* Màu chữ trắng cho dễ đọc */
+    padding: 6px 10px;
+}
+
+.table-filter-bar .filter-status-select {
+    width: 200px;
+    /* Dùng style form-input từ form.css */
+}
+
+/* Căn chỉnh Text trong bảng */
+.data-table .text-address {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.data-table .status-cell {
+    /* Đảm bảo Select Box nằm gọn */
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .table-filter-bar .input-search,
+    .table-filter-bar .filter-status-select {
+        width: 100%;
+    }
+}
+/* 1. Chờ xử lý (Pending) */
+.status-Pending {
+    background-color: #ffc107; /* Vàng */
+    color: #333; /* Chữ đen/xám cho nền vàng */
+}
+
+/* 2. Đang giao (Shipping) */
+.status-Shipping {
+    background-color: #007bff; /* Xanh dương */
+}
+
+/* 3. Hoàn thành (Completed) */
+.status-Completed {
+    background-color: #28a745; /* Xanh lá */
+}
+
+/* 4. Đã hủy (Cancelled) */
+.status-Cancelled {
+    background-color: #dc3545; /* Đỏ */
+}
+
+/* ⚠️ Quan trọng: Đảm bảo các options bên trong không bị đổi màu font */
+.status-select option {
+    color: #333; /* Chữ đen mặc định cho option */
+    background-color: white; 
+}

@@ -1,0 +1,62 @@
+/* ========================================================= */
+/* table.css - Component Tables (Tối giản) */
+/* ========================================================= */
+
+.table-responsive {
+    overflow-x: auto; /* Cho phép cuộn ngang trên mobile */
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Shadow nhẹ */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+/* Header Bảng */
+.data-table thead th {
+    background-color: #f1f1f1; /* Nền xám nhạt */
+    color: var(--color-text-dark, #333);
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Hàng trong Bảng */
+.data-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Hiệu ứng Hover Row (nhẹ nhàng) */
+.data-table tbody tr:hover {
+    background-color: #f8f8f8;
+    transition: background-color 0.15s ease;
+}
+
+/* Căn chỉnh Text/Số liệu */
+.data-table .text-price {
+    font-weight: 600;
+    color: var(--color-danger);
+}
+
+.data-table .text-secondary {
+    color: #6c757d;
+}
+
+.data-table .action-cell {
+    white-space: nowrap; /* Giữ nút hành động trên cùng một dòng */
+    display: flex;
+    gap: 8px;
+}
+
+.data-table .text-center-empty {
+    text-align: center;
+    padding: 40px 15px !important;
+    font-style: italic;
+    color: #999;
+}

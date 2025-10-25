@@ -1,0 +1,88 @@
+/* ========================================================= */
+/* form.css - Component Forms (Tối giản) */
+/* ========================================================= */
+
+.standard-form {
+    /* Form tổng thể */
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa input và button */
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--color-text-dark, #333);
+}
+
+.form-input {
+    flex-grow: 1; /* Input chiếm hết không gian còn lại */
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Bo góc nhẹ */
+    font-size: 15px;
+    color: var(--color-text-dark, #333);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Hiệu ứng nhấn nhẹ */
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    outline: none;
+}
+
+/* Style cho Card chứa Form (áp dụng cho div.add-form-card) */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Style chung cho Select Box (đã dùng class form-input) */
+.form-input.filter-status-select {
+    /* Tùy chỉnh riêng cho select box lọc */
+    padding-right: 30px; /* Tạo không gian cho mũi tên dropdown */
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+/* Select Box trong Bảng */
+.status-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: white;
+    appearance: none; /* Ẩn mũi tên mặc định */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M7.247 11.14 2.451 5.658C1.885 5.012 2.345 4 3.204 4h9.592c.859 0 1.319 1.012.753 1.658l-4.796 5.482a1 1 0 0 1-1.506 0z'/%3E%3Csvg/%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px;
+}
+
+/* Màu sắc Trạng thái (Dùng màu nổi bật cho option) */
+.status-select option[value="Pending"] { color: #ffc107; } /* Vàng */
+.status-select option[value="Shipping"] { color: #007bff; } /* Xanh dương */
+.status-select option[value="Completed"] { color: #28a745; } /* Xanh lá */
+.status-select option[value="Cancelled"] { color: #dc3545; } /* Đỏ */
