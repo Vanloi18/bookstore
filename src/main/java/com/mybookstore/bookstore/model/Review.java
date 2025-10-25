@@ -10,6 +10,9 @@ public class Review {
     private String comment;
     private Timestamp createdAt;
 
+    // Để hiển thị tên người dùng khi duyệt review
+    private User user; // Thêm đối tượng User
+
     public Review() {}
 
     // Getters and Setters
@@ -25,4 +28,8 @@ public class Review {
     public void setComment(String comment) { this.comment = comment; }
     public Timestamp getCreatedAt() { return createdAt; }
     public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
+
+    // Getter và Setter cho User
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

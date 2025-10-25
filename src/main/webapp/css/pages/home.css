@@ -1,0 +1,391 @@
+/* ===========================
+   Apple-Style Bookstore Landing Page
+   Author: Lê Văn Lợi
+   =========================== */
+
+/* ===== Reset & Base ===== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+		"Helvetica Neue", Arial, sans-serif;
+	background-color: #f9f9fb;
+	color: #1d1d1f;
+	line-height: 1.6;
+	overflow-x: hidden;
+}
+
+/* ===== Container ===== */
+.container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 60px 0;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+	text-align: center;
+	padding: 120px 20px;
+	background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+	border-radius: 28px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+	margin-bottom: 80px;
+}
+
+.hero-section h2 {
+	font-size: 2.8rem;
+	font-weight: 700;
+	color: #000;
+	margin-bottom: 20px;
+}
+
+.hero-section p {
+	color: #515154;
+	font-size: 1.1rem;
+	max-width: 700px;
+	margin: 0 auto 40px;
+}
+
+.cta-button {
+	background-color: #0071e3;
+	color: #fff;
+	text-decoration: none;
+	padding: 14px 36px;
+	border-radius: 50px;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	transition: all 0.25s ease;
+	display: inline-block;
+}
+
+.cta-button:hover {
+	background-color: #005bb5;
+	transform: translateY(-2px);
+}
+
+/* ===== Section Titles ===== */
+.section {
+	text-align: center;
+	margin-bottom: 90px;
+}
+
+.section-title {
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 30px;
+	color: #000;
+}
+
+/* ===== About Section ===== */
+.about-section {
+	max-width: 900px;
+	margin: 0 auto 80px;
+}
+
+.about-section p {
+	font-size: 1.1rem;
+	color: #515154;
+	line-height: 1.7;
+}
+
+/* ===== Featured Books ===== */
+.book-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 30px;
+	margin-top: 40px;
+}
+
+.book-item {
+	background: #ffffff;
+	border-radius: 20px;
+	padding: 20px;
+	text-align: center;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.book-item:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.book-item img {
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+	border-radius: 16px;
+	margin-bottom: 15px;
+}
+
+.book-item h4 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #1d1d1f;
+	margin-bottom: 8px;
+}
+
+.book-item .author {
+	color: #6e6e73;
+	font-size: 0.95rem;
+	margin-bottom: 10px;
+}
+
+.book-item .price {
+	font-weight: 500;
+	color: #0071e3;
+	margin-bottom: 12px;
+}
+
+.book-item .detail-btn {
+	display: inline-block;
+	background-color: #f5f5f7;
+	color: #1d1d1f;
+	padding: 8px 16px;
+	border-radius: 12px;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.book-item .detail-btn:hover {
+	background-color: #0071e3;
+	color: #fff;
+}
+
+/* ===== Why Choose Us ===== */
+.why-choose-us-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 40px;
+	margin-top: 40px;
+}
+
+.reason-item {
+	background: #fff;
+	border-radius: 20px;
+	padding: 40px 25px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+	transition: all 0.25s ease;
+}
+
+.reason-item:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.reason-item i {
+	font-size: 2.5rem;
+	color: #0071e3;
+	margin-bottom: 18px;
+}
+
+.reason-item h3 {
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+
+/* ===== Testimonials ===== */
+.testimonial-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 30px;
+	margin-top: 40px;
+}
+
+.testimonial-item {
+	background: #fff;
+	padding: 30px 25px;
+	border-radius: 18px;
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+	font-style: italic;
+	transition: all 0.25s ease;
+}
+
+.testimonial-item:hover {
+	transform: translateY(-6px);
+}
+
+.testimonial-item p {
+	color: #515154;
+	margin-bottom: 15px;
+}
+
+.testimonial-item .author {
+	display: block;
+	font-weight: 600;
+	color: #1d1d1f;
+}
+
+/* ===== CTA Form Section ===== */
+.cta-bar-form {
+	background: linear-gradient(135deg, #0071e3, #005bb5);
+	color: #fff;
+	text-align: center;
+	border-radius: 28px;
+	padding: 60px 30px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cta-bar-form h3 {
+	font-size: 1.8rem;
+	margin-bottom: 15px;
+}
+
+.cta-bar-form p {
+	font-size: 1.05rem;
+	margin-bottom: 25px;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #f5f5f5;
+}
+
+.cta-bar-form form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+}
+
+.cta-bar-form input {
+	padding: 12px 18px;
+	border: none;
+	border-radius: 10px;
+	width: 260px;
+	font-size: 1rem;
+}
+
+.cta-bar-form button {
+	padding: 12px 30px;
+	border: none;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #0071e3;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.25s ease;
+}
+
+.cta-bar-form button:hover {
+	background-color: #e5e5e5;
+	transform: translateY(-2px);
+}
+
+/* ===== Responsive ===== */
+@media ( max-width : 768px) {
+	.hero-section h2 {
+		font-size: 2rem;
+	}
+	.hero-section p {
+		font-size: 1rem;
+	}
+	.cta-bar-form form {
+		flex-direction: column;
+		align-items: stretch;
+	}
+}
+
+/* ===== Banner Slider ===== */
+.banner-slider {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 40px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.slider-track {
+    display: flex;
+    width: 300%; /* 3 ảnh → 3x */
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 450px;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nút điều hướng */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.8);
+    color: #333;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.prev:hover, .next:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* Dots */
+.dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #000;
+}
+
+/* Responsive */
+@media ( max-width : 768px) {
+	.slide {
+		height: 250px;
+	}
+	.prev, .next {
+		font-size: 18px;
+		padding: 8px;
+	}
+}
+
+.no-books-message {
+	text-align: center;
+	grid-column: 1/-1; /* Đảm bảo nó chiếm toàn bộ chiều rộng của grid */
+	padding: 20px;
+	color: #777;
+}

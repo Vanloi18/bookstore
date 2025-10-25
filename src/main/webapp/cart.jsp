@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Giỏ Hàng của bạn</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/cart.css">
 </head>
 <body>
     <jsp:include page="header.jsp">

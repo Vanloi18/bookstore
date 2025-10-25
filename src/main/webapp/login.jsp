@@ -6,8 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng Nhập</title>
-    <%-- Đảm bảo đường dẫn tới file CSS là chính xác --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
+    <!-- CSS chung toàn trang -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+
+    <!-- CSS riêng cho trang đăng nhập -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/login.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />

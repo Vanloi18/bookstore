@@ -1,0 +1,173 @@
+/* ====== cart.css ====== */
+
+/* Tổng thể trang */
+body {
+  background-color: #f9fafb;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1c1c1e;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  min-height: 80vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 40px 60px;
+  transition: 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+}
+
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+/* Bảng sản phẩm */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+th, td {
+  padding: 14px 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f3f5;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Ô nhập số lượng */
+.quantity-input {
+  width: 70px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.quantity-input:focus {
+  border-color: #0071e3;
+  box-shadow: 0 0 4px rgba(0,113,227,0.3);
+  outline: none;
+}
+
+/* Nút cập nhật */
+button[type="submit"] {
+  background: #0071e3;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.25s;
+}
+
+button[type="submit"]:hover {
+  background: #005bb5;
+}
+
+/* Link “Xóa” */
+a[href*="remove-from-cart"] {
+  color: #ff3b30;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a[href*="remove-from-cart"]:hover {
+  color: #d70015;
+}
+
+/* Tổng cộng */
+td[colspan="3"], td[colspan="2"] {
+  padding-top: 20px;
+  font-size: 17px;
+}
+
+/* Các nút hành động */
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cart-actions a {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-continue {
+  background: #e5e5ea;
+  color: #111;
+}
+
+.btn-continue:hover {
+  background: #d1d1d6;
+}
+
+.btn-checkout {
+  background: #0071e3;
+  color: #fff;
+}
+
+.btn-checkout:hover {
+  background: #005bb5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  table, tr, td, th {
+    font-size: 14px;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-actions a {
+    width: 100%;
+  }
+}
