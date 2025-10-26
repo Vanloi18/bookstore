@@ -1,0 +1,334 @@
+/* ========================================================= */
+/* admin-layout.css - CSS cho Layout chung Admin (Sidebar, Main Content, Header) */
+/* ========================================================= */
+
+/* Định nghĩa Biến Màu & Font */
+:root {
+    --color-primary: #007bff; /* Xanh dương - Topbar, Active */
+    --color-dark: #343a40; /* Màu đậm cho Sidebar */
+    --color-background-main: #f8f9fa; /* Nền chính sáng */
+    --color-text-dark: #212529; /* Text tối dễ đọc */
+    --color-text-light: #ffffff; /* Text trên nền đậm */
+    --color-hover: #495057; /* Màu hover nhẹ cho Sidebar */
+    --sidebar-width: 250px;
+    --topbar-height: 60px;
+    --font-stack: 'Open Sans', 'Roboto', sans-serif;
+}
+
+/* Base Body */
+.admin-body {
+    font-family: var(--font-stack);
+    background-color: var(--color-background-main);
+    color: var(--color-text-dark);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Main Content Area */
+.admin-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sidebar-width); /* Tạo khoảng trống cho Sidebar cố định */
+    transition: margin-left 0.3s ease;
+}
+
+/* 1. Sidebar (Trái - admin-sidebar.jsp) */
+.admin-sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--color-dark);
+    color: var(--color-text-light);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20px;
+    z-index: 1010;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto; /* Cho phép cuộn nếu menu dài */
+    transition: transform 0.3s ease;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 15px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-menu li a:hover {
+    background-color: var(--color-hover); /* Nền đậm hơn khi hover */
+    color: var(--color-text-light);
+}
+
+.sidebar-menu li.active a {
+    background-color: var(--color-primary); /* Màu xanh dương (hoặc cam) cho Active */
+    color: var(--color-text-light);
+    font-weight: 600;
+    border-left: 5px solid white; /* Highlight Active */
+    padding-left: 15px;
+}
+
+.sidebar-menu i {
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+/* 2. Topbar (Trên - admin-header.jsp) */
+.admin-header {
+    background-color: var(--color-dark); /* Màu đậm, đồng bộ với Sidebar */
+    color: var(--color-text-light);
+    height: var(--topbar-height);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 25px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: var(--sidebar-width);
+    z-index: 990;
+    transition: left 0.3s ease;
+}
+
+.header-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-user-info a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 1em;
+    opacity: 0.9;
+}
+.header-user-info a:hover {
+    opacity: 1;
+}
+
+/* 3. Content Area */
+.admin-page-content {
+    padding: 25px;
+    flex-grow: 1;
+    background-color: var(--color-background-main);
+    margin-top: var(--topbar-height); /* Đẩy nội dung xuống */
+    min-height: calc(100vh - var(--topbar-height));
+}
+
+.admin-page-content h1 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--color-text-dark);
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    /* Sidebar collapse trên mobile */
+    .admin-sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+    .admin-main-content {
+        margin-left: 0;
+    }
+    .admin-header {
+        left: 0;
+    }
+    
+    /* Cần thêm class này vào <body> khi nhấn nút toggle menu trên mobile */
+    .sidebar-toggled .admin-sidebar {
+        transform: translateX(0);
+        box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    }
+}
+
+/* 1. Sidebar Container */
+.admin-sidebar {
+    /* ... (giữ nguyên các thuộc tính khác) ... */
+    padding: 20px 15px; /* Giảm padding ngang để có không gian cho hiệu ứng active */
+}
+
+/* 2. Tiêu đề/Logo */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px 25px 5px; /* Padding phù hợp */
+    color: white;
+}
+
+.sidebar-header h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-header .logo-icon {
+    font-size: 1.4em;
+    margin-right: 10px;
+    color: var(--color-primary-active); /* Icon màu xanh nổi bật */
+}
+
+/* 3. Menu chính */
+.main-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-menu li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục menu */
+}
+
+.main-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: var(--color-sidebar-text); /* Màu chữ mờ */
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    border-radius: 6px; /* Bo góc nhẹ */
+}
+
+.main-menu li a:hover {
+    background-color: var(--color-sidebar-hover);
+    color: white; /* Chữ sáng hơn khi hover */
+}
+
+/* HIỆU ỨNG ACTIVE (Apple-style) */
+.main-menu li.active a {
+    background-color: var(--color-primary-active); /* Màu nền xanh dương */
+    color: white;
+    font-weight: 600;
+    /* Loại bỏ border-left cũ, tập trung vào background bo góc */
+    border-left: none; 
+    padding-left: 15px; 
+}
+
+.main-menu i {
+    font-size: 1em;
+    margin-right: 15px; /* Tăng khoảng cách icon */
+}
+
+
+/* 4. Footer Sidebar (Đăng xuất) */
+.sidebar-footer {
+    position: absolute; /* Đặt footer cố định ở dưới */
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--color-sidebar-text);
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.sidebar-footer a:hover {
+    color: #ff3b30; /* Màu đỏ nổi bật cho Đăng xuất */
+    background-color: rgba(255, 59, 48, 0.1);
+}
+/* ========================================================= */
+/* CSS cho Topbar (admin-header.jsp) */
+/* ========================================================= */
+
+/* Giữ cố định header theo style đã định nghĩa */
+.admin-header {
+    background-color: var(--color-dark); /* #343a40 */
+    color: var(--color-text-light); /* Màu trắng */
+    height: var(--topbar-height); /* 60px */
+    display: flex;
+    justify-content: flex-end; /* Nội dung về bên phải */
+    align-items: center;
+    padding: 0 25px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: var(--sidebar-width); /* Căn chỉnh với Sidebar */
+    z-index: 990;
+    transition: left 0.3s ease;
+}
+
+/* Khu vực thông tin người dùng */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    font-size: 0.9em;
+}
+
+.user-info span {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Tên người dùng đậm và sáng hơn */
+.user-info strong {
+    color: white; 
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+/* Liên kết Đăng xuất/Đăng nhập (theo theme xanh dương) */
+.user-info a {
+    color: var(--color-primary, #007bff); 
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.user-info a:hover {
+    color: white;
+    background-color: var(--color-primary, #007bff);
+}
+
+/* Nút thông báo (Nếu bạn thêm sau này) */
+.notification-icon {
+    /* Style cho icon chuông, tương tự như đã gợi ý trong bước trước */
+    position: relative;
+    font-size: 1.1em;
+    color: white;
+    margin-right: 10px;
+}
+
+@media (max-width: 992px) {
+    .admin-header {
+        left: 0; /* Header kéo dài hết chiều ngang khi sidebar ẩn */
+    }
+}
+
+/* Thêm CSS cho Footer */
+.admin-footer {
+    padding: 10px 25px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+    color: #6c757d;
+    font-size: 0.8em;
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+}

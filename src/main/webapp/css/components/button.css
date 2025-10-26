@@ -1,3 +1,72 @@
+/* ========================================================= */
+/* button.css - Component Buttons (Apple-style) */
+/* ========================================================= */
+
+:root {
+    --color-primary: #007bff; /* Xanh dương */
+    --color-danger: #dc3545; /* Đỏ */
+    --color-success: #28a745; /* Xanh lá */
+    --color-info: #17a2b8; /* Xanh ngọc (cho Sửa) */
+    --color-text-light: #ffffff;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 8px; /* Bo góc nhẹ nhàng */
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+
+.btn i {
+    margin-right: 8px;
+    font-size: 1.0em;
+}
+
+/* Primary Button (Thêm Mới) */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4);
+}
+
+/* Danger Button (Xóa) */
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-text-light);
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Info Button (Sửa - Màu xanh nhạt) */
+.btn-info {
+    background-color: var(--color-info);
+    color: var(--color-text-light);
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+/* Small Button (cho hành động Sửa/Xóa trong bảng) */
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+}
 .button {
     display: inline-flex;
     align-items: center;
