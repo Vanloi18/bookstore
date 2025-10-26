@@ -24,3 +24,17 @@
 
 /* Themes */
 @import url("themes/apple-theme.css");
+/* ===== Hero Section & CTA Button (ĐÃ CHỈNH SỬA) ===== */
+.hero-section {
+	text-align: center;
+	
+	/* XÓA BỎ CÁC THUỘC TÍNH BỊ CHUYỂN SANG STYLE NỘI TUYẾN */
+    /* background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%); <--- XÓA */
+    /* padding: 120px 20px; <--- XÓA */
+    
+    /* Chỉ giữ lại các thuộc tính layout chung */
+	/* border-radius: 28px; */
+	/* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); */
+	/* margin-bottom: 80px; */
+}
+/* ... và đảm bảo .hero-section h2, .hero-section p KHÔNG có color: #000 nữa */

@@ -69,10 +69,14 @@
                         <p class="price">
                             <fmt:formatNumber value="${book.price}" type="number"/> VNĐ
                         </p>
-                        <a href="${pageContext.request.contextPath}/product-detail?id=${book.id}" 
-                           class="btn-detail">
-                           Xem chi tiết
-                        </a>
+                     <%-- Nút Thêm vào Giỏ hàng --%>
+	<form action="${pageContext.request.contextPath}/add-to-cart" method="post" style="display:inline;">
+		<input type="hidden" name="bookId" value="${book.id}">
+		<input type="hidden" name="quantity" value="1"> <%-- Mặc định thêm 1 sản phẩm --%>
+		<button type="submit" class="btn btn-dark rounded-pill px-3 py-1 mt-auto">
+			<i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
+		</button>
+	</form>
                     </div>
                 </c:forEach>
 

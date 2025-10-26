@@ -6,7 +6,7 @@
         <!-- Logo / Thương hiệu -->
         <div class="brand">
             <a href="${pageContext.request.contextPath}/home" class="brand-link">
-                <h1 class="brand-title">Nhà Sách Online</h1>
+                <h1 class="brand-title">BookWorld</h1>
             </a>
         </div>
 
@@ -17,8 +17,10 @@
 
         <!-- Thanh điều hướng -->
         <nav class="nav-links" id="navLinks">
+          <a href="${pageContext.request.contextPath}/home"
+               class="${param.currentPage == 'books' ? 'active' : ''}">Trang Chủ </a>
             <a href="${pageContext.request.contextPath}/books"
-               class="${param.currentPage == 'books' ? 'active' : ''}">Cửa Hàng</a>
+               class="${param.currentPage == 'books' ? 'active' : ''}">Sản Phẩm </a>
 
             <c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
 

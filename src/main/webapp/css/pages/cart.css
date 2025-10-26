@@ -76,15 +76,18 @@ tr:last-child td {
 }
 
 .quantity-input:focus {
-  border-color: #0071e3;
-  box-shadow: 0 0 4px rgba(0,113,227,0.3);
+  /* MÀU PASTEL: Viền khi focus */
+  border-color: #B3E0FF; 
+  box-shadow: 0 0 4px rgba(179, 224, 255, 0.5); /* Box shadow pastel hơn */
   outline: none;
 }
 
 /* Nút cập nhật */
 button[type="submit"] {
-  background: #0071e3;
-  color: #fff;
+  /* MÀU PASTEL: Nền nút cập nhật */
+  background: #B3E0FF; 
+  /* Đổi màu chữ sang màu tối để dễ đọc trên nền pastel */
+  color: #1c1c1e; 
   border: none;
   padding: 6px 14px;
   border-radius: 10px;
@@ -94,10 +97,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: #005bb5;
+  /* MÀU PASTEL: Nền nút cập nhật hover */
+  background: #80CCFF; 
 }
 
-/* Link “Xóa” */
+/* Link “Xóa” (Giữ màu đỏ vì là hành động xóa) */
 a[href*="remove-from-cart"] {
   color: #ff3b30;
   text-decoration: none;
@@ -144,12 +148,14 @@ td[colspan="3"], td[colspan="2"] {
 }
 
 .btn-checkout {
-  background: #0071e3;
-  color: #fff;
+  /* MÀU PASTEL: Nút Thanh toán */
+  background: #B3E0FF; 
+  color: #1c1c1e; /* Đổi màu chữ sang màu tối */
 }
 
 .btn-checkout:hover {
-  background: #005bb5;
+  /* MÀU PASTEL: Nút Thanh toán hover */
+  background: #80CCFF;
 }
 
 /* Responsive */
