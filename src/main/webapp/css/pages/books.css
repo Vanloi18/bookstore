@@ -287,9 +287,6 @@ body {
 
 .pagination li a:hover {
     transform: translateY(-2px);
-<<<<<<< HEAD
-}
-=======
 }
 /* ========================================================= */
 /* books.css - CSS riêng cho trang Quản lý Sách */
@@ -352,4 +349,3 @@ body {
         width: 100%;
     }
 }
->>>>>>> 321ac6bbe0e0f01bbd378cc847e483807a0c1fd8

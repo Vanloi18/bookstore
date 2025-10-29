@@ -28,8 +28,7 @@
                 <span class="user-greeting">
                     Xin chào, <strong>${loggedInUser.fullname}</strong>!
                 </span>
-                <a href="${pageContext.request.contextPath}/books"
-               class="${param.currentPage == 'books' ? 'active' : ''}">Cửa Hàng</a>
+   
                 <a href="${pageContext.request.contextPath}/order-history"
                    class="${param.currentPage == 'order-history' ? 'active' : ''}">Lịch sử mua hàng</a>
 
