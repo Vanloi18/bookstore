@@ -249,4 +249,86 @@ public class OrderDAO {
         order.setStatus(rs.getString("status"));
         return order;
     }
+ // Trong OrderDAO.java (Bổ sung)
+
+    /** Đếm số lượng đơn hàng theo từng trạng thái */
+    public Map<String, Integer> getOrderStatusCounts() {
+        Map<String, Integer> statusCounts = new HashMap<>();
+        String sql = "SELECT status, COUNT(*) AS count FROM orders GROUP BY status";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                statusCounts.put(rs.getString("status"), rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statusCounts;
+    }
+
+    /** Lấy N đơn hàng gần nhất (ID, userId, totalAmount, status) */
+    public List<Order> getRecentOrders(int limit) {
+        List<Order> list = new ArrayList<>();
+        // Dùng JOIN với bảng users để lấy tên người dùng (userName) nếu cần hiển thị
+        String sql = "SELECT o.*, u.name AS userName FROM orders o JOIN users u ON o.userId = u.id ORDER BY orderDate DESC LIMIT ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, limit);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Order order = extractOrderFromResultSet(rs);
+                    // Bạn có thể tạm lưu userName vào một trường nào đó của Order hoặc tạo DTO
+                    list.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+ // Giả định bạn có một DTO đơn giản để chứa kết quả:
+ // public class BookSalesDTO { private int bookId; private String title; private long totalQuantitySold; ... }
+
+ /**
+  * Lấy danh sách Top N sách bán chạy nhất (dựa trên số lượng).
+  * @param limit Số lượng sách muốn lấy (ví dụ: 5)
+  * @return List các đối tượng chứa thông tin sách và số lượng bán.
+  */
+ public List<Map<String, Object>> getTopSellingBooks(int limit) {
+     List<Map<String, Object>> topBooks = new ArrayList<>();
+     
+     // GIẢ ĐỊNH: Bảng 'order_details' có cột 'bookId' và 'quantity'
+     // GIẢ ĐỊNH: Bảng 'books' có cột 'id' và 'title'
+     String sql = "SELECT od.bookId, b.title, SUM(od.quantity) AS total_sold " +
+                  "FROM order_details od " +
+                  "JOIN books b ON od.bookId = b.id " +
+                  // Chỉ tính các đơn hàng đã hoàn thành
+                  "JOIN orders o ON od.orderId = o.id WHERE o.status = 'Completed' " +
+                  "GROUP BY od.bookId, b.title " +
+                  "ORDER BY total_sold DESC " +
+                  "LIMIT ?";
+
+     try (Connection connection = DatabaseConnection.getConnection();
+          PreparedStatement ps = connection.prepareStatement(sql)) {
+
+         ps.setInt(1, limit);
+         try (ResultSet rs = ps.executeQuery()) {
+             while (rs.next()) {
+                 Map<String, Object> bookData = new HashMap<>();
+                 bookData.put("id", rs.getInt("bookId"));
+                 bookData.put("title", rs.getString("title"));
+                 bookData.put("total_sold", rs.getLong("total_sold"));
+                 topBooks.add(bookData);
+             }
+         }
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+     return topBooks;
+ }
 }

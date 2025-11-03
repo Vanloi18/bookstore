@@ -39,7 +39,7 @@
                 </a>
             </li>
              <li class="${param.activePage == 'reports' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/admin/reports">
+                <a href="${pageContext.request.contextPath}/admin/baocao">
                     <i class="fas fa-chart-bar"></i> Báo cáo / Thống kê
                 </a>
             </li>

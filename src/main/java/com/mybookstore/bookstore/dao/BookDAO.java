@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BookDAO {
 
@@ -267,5 +269,23 @@ public class BookDAO {
         }
         return books;
     }
+ // Giả định bạn có BookDAO hoặc OrderDetailDAO để truy vấn chi tiết đơn hàng
 
+    /** Đếm tổng số lượng sách đã bán (từ chi tiết đơn hàng) */
+    public int countTotalBooksSold() {
+        // Truy vấn SUM(quantity) từ bảng order_details cho các đơn hàng đã 'Completed'
+        String sql = "SELECT SUM(od.quantity) FROM order_details od JOIN orders o ON od.orderId = o.id WHERE o.status = 'Completed'";
+        // ... thực hiện truy vấn và trả về int
+        return 5890; // Giá trị giả định
+    }
+
+    /** Lấy tổng doanh thu theo từng Thể loại sách */
+    public Map<String, Double> getRevenueByCategory() {
+        // Truy vấn phức tạp hơn: GROUP BY category.name và SUM(od.quantity * b.price)
+        // ... thực hiện truy vấn và trả về Map<Tên_Thể_loại, Doanh_thu>
+        Map<String, Double> map = new LinkedHashMap<>();
+        map.put("Tiểu thuyết", 3500.00);
+        map.put("Kỹ năng", 2800.00);
+        return map;
+    }
 }

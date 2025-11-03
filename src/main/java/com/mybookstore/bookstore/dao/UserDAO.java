@@ -204,5 +204,26 @@ public class UserDAO {
         // Không lấy password
         return user;
     }
+ // ... (các phương thức khác)
+
+    /**
+     * Đếm số lượng người dùng mới (không phải admin) đăng ký trong tháng hiện tại.
+     */
+    public int countNewUsersThisMonth() {
+        // YEAR(createdAt) = YEAR(CURDATE()) AND MONTH(createdAt) = MONTH(CURDATE())
+        String sql = "SELECT COUNT(*) FROM users WHERE isAdmin = false AND YEAR(createdAt) = YEAR(CURDATE()) AND MONTH(createdAt) = MONTH(CURDATE())";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+// ... (các phương thức khác)
 }
 

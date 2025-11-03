@@ -91,8 +91,8 @@
 		</section>
 
 		<section class="section about-section">
-			<h2 class="section-title">Về BookStore</h2>
-			<p>BookStore tự hào là điểm đến tin cậy cho những người yêu sách.
+			<h2 class="section-title">Về BookWorld</h2>
+			<p>BookWorld tự hào là điểm đến tin cậy cho những người yêu sách.
 				Chúng tôi cam kết mang đến những đầu sách chất lượng, cập nhật liên
 				tục với giá cả phải chăng, cùng trải nghiệm mua sắm trực tuyến tiện
 				lợi và nhanh chóng nhất.</p>

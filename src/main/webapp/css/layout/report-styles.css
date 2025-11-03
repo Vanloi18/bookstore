@@ -1,0 +1,213 @@
+/* report-styles.css */
+
+/* --- Cấu trúc chung --- */
+.report-container {
+    padding: 20px 30px;
+}
+
+/* --- Header và Filters --- */
+.report-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.report-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.report-header p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-select {
+    width: 150px;
+    height: 38px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+}
+
+.btn-export {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* --- KPI Cards --- */
+.kpi-row {
+    margin-top: 10px;
+    margin-bottom: 30px !important;
+}
+
+.kpi-card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.kpi-card .card-body {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.kpi-icon {
+    font-size: 2rem;
+    color: #007bff; /* Màu mặc định */
+    background-color: #e9f5ff; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.kpi-detail h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.kpi-detail p {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.change-rate {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+
+/* report-styles.css (CHỈNH SỬA PHẦN LIÊN QUAN ĐẾN CHART CARDS) */
+
+/* --- Chart Cards và List Cards --- */
+.chart-card, .list-card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card .card-header, .list-card .card-header {
+    background-color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ĐẶT CHIỀU CAO CHO CONTAINER CỦA BIỂU ĐỒ ĐỂ TRÁNH LỖI KÍCH THƯỚC */
+.chart-card .card-body {
+    position: relative;
+    height: 300px; 
+    padding: 15px; 
+}
+
+/* ✅ QUY TẮC BẮT BUỘC THÊM: Giúp thẻ <canvas> hiển thị bên trong chiều cao 300px */
+.chart-card .card-body canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block; 
+}
+/* KẾT THÚC QUY TẮC BẮT BUỘC */
+
+#categoryDistributionChart {
+    max-height: 200px; 
+    max-width: 100%; 
+    margin: auto;
+}
+/* KẾT THÚC ĐẶT CHIỀU CAO */
+
+/* ... (Các quy tắc khác giữ nguyên) ... */
+
+/* Phân bổ theo Thể loại (List) */
+.department-item {
+    margin-bottom: 15px;
+}
+.department-item p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+/* Progress bar */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+}
+.progress-bar {
+    border-radius: 4px;
+}
+
+/* Danh sách Đơn hàng Gần đây */
+#recent-orders-list {
+    max-height: 250px; /* Giới hạn chiều cao cho scroll nếu cần */
+    overflow-y: auto;
+}
+.interview-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+.interview-item:last-child {
+    border-bottom: none;
+}
+.name-title {
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.role-time {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 2px;
+}
+.badge {
+    padding: 5px 8px;
+    font-weight: 500;
+    border-radius: 4px;
+    color: white !important; /* Đảm bảo chữ trắng trên nền màu */
+}
+.chart-card {
+    height: auto !important;
+}
+
+.chart-card .card-body {
+    position: relative;
+    min-height: 300px !important;
+}
+
+.chart-card .card-body canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+/* Màu sắc cho Bootstrap Badges */
+.bg-success { background-color: #28a745 !important; }
+.bg-warning { background-color: #ffc107 !important; }
+.bg-info { background-color: #17a2b8 !important; }
+.bg-danger { background-color: #dc3545 !important; }
+.bg-primary { background-color: #007bff !important; }

@@ -87,4 +87,48 @@
         /* Xếp dọc trên điện thoại */
         grid-template-columns: 1fr;
     }
+}/* Trong admin-dashboard.css */
+
+.stats-row .list-card {
+    /* Giữ nguyên các thuộc tính Flexbox/Shadows */
+    flex: 1 1 45%; 
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 350px; 
+    /* Thêm padding cho nội dung card */
+    padding: 20px; /* <--- Bổ sung dòng này nếu chưa có */
+}
+
+/* Định kiểu tiêu đề bảng (header) */
+.list-card .card-header h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+/* Trong admin-dashboard.css (hoặc table.css) */
+
+.list-card .table {
+    width: 100%;
+    border-collapse: collapse; /* Gộp các đường viền bảng */
+    margin-bottom: 0;
+}
+
+.list-card .table th, 
+.list-card .table td {
+    padding: 10px 0; /* Giảm padding ngang (hoặc thêm nếu cần) */
+    text-align: left;
+    /* Phân chia các cột */
+    width: 50%; /* Có thể dùng để chia đều Tên Sách và Số Lượng Bán */
+    border-bottom: 1px solid #eee; /* Đường kẻ phân cách hàng */
+}
+
+.list-card .table th {
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.85em;
 }
