@@ -1,9 +1,14 @@
-// report-charts.js
+// ==========================
+// report-charts.js (Hoàn chỉnh)
+// ==========================
 
-// Hàm gọi API chung
+
+// 1️⃣ Hàm gọi API chung
 async function fetchData(action) {
     // Xây dựng URL API dựa trên context path hiện tại
-    const url = `${window.location.origin}${window.location.pathname}?action=${action}`;
+    const url = new URL(window.location.href);
+    url.searchParams.set('action', action);
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -12,121 +17,146 @@ async function fetchData(action) {
         }
         return await response.json();
     } catch (error) {
-        // Đã sửa lỗi cú pháp Template Literal tại đây
         console.error(`Lỗi khi gọi API ${action}:`, error);
         return null;
     }
 }
 
-// Hàm format tiền tệ (Ví dụ: 1234500 -> 1.234.500₫)
+// 2️⃣ Hàm format tiền tệ (VD: 1234500 -> 1.234.500₫)
 function formatCurrency(amount) {
-    // Đảm bảo amount là số trước khi format
+    if (isNaN(amount)) return "0₫";
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
         .format(parseFloat(amount));
 }
 
-// 1. Cập nhật KPI Cards
+// ==========================
+// 3️⃣ Cập nhật KPI Cards
+// ==========================
 async function updateKpiCards() {
     const data = await fetchData('kpis');
+    if (!data) return;
 
-    if (data) {
-        document.getElementById('kpi-total-orders').innerText = data.totalOrders.toLocaleString('vi-VN');
-        document.getElementById('kpi-total-revenue').innerText = formatCurrency(data.totalRevenue);
-        document.getElementById('kpi-books-sold').innerText = data.totalBooksSold.toLocaleString('vi-VN');
-        document.getElementById('kpi-conversion-rate').innerText = data.conversionRate + '%';
-    }
+    document.getElementById('kpi-total-orders').innerText = data.totalOrders?.toLocaleString('vi-VN') || '0';
+    document.getElementById('kpi-total-revenue').innerText = formatCurrency(data.totalRevenue);
+    document.getElementById('kpi-books-sold').innerText = data.totalBooksSold?.toLocaleString('vi-VN') || '0';
+    document.getElementById('kpi-conversion-rate').innerText = (data.conversionRate || 0) + '%';
 }
 
-// 2. Vẽ Biểu đồ Xu hướng Doanh thu (Bar Chart)
+// ==========================
+// 4️⃣ Biểu đồ Xu hướng Doanh thu (Bar Chart)
+// ==========================
+let revenueChart;
 async function drawRevenueTrendChart() {
     const data = await fetchData('trend');
+    const canvas = document.getElementById('revenueTrendChart');
+    if (!canvas || !data || !data.labels || data.labels.length === 0) return;
 
-	if (data && data.values.length > 0) {
-	        const ctx = document.getElementById('revenueTrendChart').getContext('2d');
-	        new Chart(ctx, {
-	            type: 'bar',
-	            data: { /* ... */ },
-	            options: {
-	                responsive: true,
-	                maintainAspectRatio: false, // <-- ĐÃ THÊM: Cho phép co giãn theo chiều cao cố định
-	                scales: { y: { beginAtZero: true } },
-	                plugins: { legend: { display: false } }
-	            }
-	        });
-	    }
-	}
+    const ctx = canvas.getContext('2d');
+    if (revenueChart) revenueChart.destroy();
 
-// 3. Vẽ Biểu đồ Phân bổ Thể loại (Doughnut Chart)
-async function drawCategoryDistributionChart() {
-    const listData = await fetchData('distribution');
-
-    if (listData && listData.length > 0) {
-        const labels = listData.map(item => item.category);
-        const values = listData.map(item => item.revenue);
-        const backgroundColors = ['#007bff', '#17a2b8', '#ffc107', '#dc3545', '#6c757d', '#28a745'];
-
-        const categoryListElement = document.getElementById('category-list');
-
-        // Đã sửa lỗi Template Literal trong hàm map() này
-        categoryListElement.innerHTML = listData.map((item, index) => `
-            <div class="department-item">
-                <p>${item.category} <span>${item.percentage.toFixed(1)}%</span></p>
-                <div class="progress">
-                    <div class="progress-bar"
-                        style="width: ${item.percentage}%; background-color: ${backgroundColors[index % backgroundColors.length]} !important;"
-                        aria-valuenow="${item.percentage}">
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-        // Vẽ biểu đồ Doughnut
-		// Vẽ biểu đồ Doughnut
-		        const ctx = document.getElementById('categoryDistributionChart').getContext('2d');
-		        new Chart(ctx, {
-		            type: 'doughnut',
-		            data: {
-		                labels: labels,
-		                datasets: [{
-		                    data: values,
-		                    backgroundColor: backgroundColors,
-		                    hoverOffset: 4
-		                }]
-		            },
-		            options: { 
-		                responsive: true, 
-		                maintainAspectRatio: false, // <-- THAY ĐỔI QUAN TRỌNG
-		                plugins: { legend: { display: false } } 
-		            }
-		        });
-		    }
+    revenueChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Doanh thu (VNĐ)',
+                data: data.values,
+                backgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } },
+            plugins: { legend: { display: false } }
+        }
+    });
 }
 
-// 4. Vẽ Biểu đồ Trạng thái Đơn hàng (Horizontal Bar Chart)
+// ==========================
+// 5️⃣ Biểu đồ Phân bổ Thể loại (Doughnut Chart)
+// ==========================
+let categoryChart;
+async function drawCategoryDistributionChart() {
+    const listData = await fetchData('distribution');
+    const canvas = document.getElementById('categoryDistributionChart');
+    const categoryListElement = document.getElementById('category-list');
+    if (!canvas || !listData || listData.length === 0) return;
+
+    const labels = listData.map(item => item.category);
+    const values = listData.map(item => item.revenue);
+    const backgroundColors = ['#007bff', '#17a2b8', '#ffc107', '#dc3545', '#6c757d', '#28a745'];
+
+	categoryListElement.innerHTML = listData.map((item, index) => 
+	    '<div class="department-item">' +
+	        '<p>' + item.category + ' <span>' + item.percentage.toFixed(1) + '%</span></p>' +
+	        '<div class="progress">' +
+	            '<div class="progress-bar" style="width:' + item.percentage + '%;"></div>' +
+	        '</div>' +
+	    '</div>'
+	).join('');
+
+
+    const ctx = canvas.getContext('2d');
+    if (categoryChart) categoryChart.destroy();
+
+    categoryChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: backgroundColors,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+        }
+    });
+}
+
+// ==========================
+// 6️⃣ Biểu đồ Trạng thái Đơn hàng (Horizontal Bar Chart)
+// ==========================
+let orderStatusChart;
 async function drawOrderStatusChart() {
     const data = await fetchData('status');
+    const canvas = document.getElementById('orderStatusChart');
+    if (!canvas || !data || !data.labels) return;
 
-	if (data) {
-	        const ctx = document.getElementById('orderStatusChart').getContext('2d');
-	        new Chart(ctx, {
-	            type: 'bar',
-	            data: { /* ... */ },
-	            options: {
-	                indexAxis: 'y',
-	                responsive: true,
-	                maintainAspectRatio: false, // <-- ĐÃ THÊM: Cho phép co giãn theo chiều cao cố định
-	                plugins: { legend: { display: false } },
-	                scales: { x: { beginAtZero: true } }
-	            }
-	        });
-	    }
-	}
+    const ctx = canvas.getContext('2d');
+    if (orderStatusChart) orderStatusChart.destroy();
 
+    orderStatusChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Số lượng đơn hàng',
+                data: data.values,
+                backgroundColor: '#28a745'
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+}
 
-// 5. Cập nhật Danh sách Đơn hàng Gần đây
+// ==========================
+// 7️⃣ Danh sách Đơn hàng gần đây
+// ==========================
 async function updateRecentOrders() {
     const listData = await fetchData('recent');
     const listElement = document.getElementById('recent-orders-list');
+    if (!listElement) return;
 
     if (listData && listData.length > 0) {
         listElement.innerHTML = listData.map(order => {
@@ -143,11 +173,11 @@ async function updateRecentOrders() {
 
             return `
                 <div class="interview-item">
-                    <p class="name-title">Đơn hàng #${order.id}
-                        <span class="badge ${statusClass}">${order.status}</span>
+                    <p class="name-title">Đơn hàng #\${order.id}
+                        <span class="badge \${statusClass}">\${order.status}</span>
                     </p>
-                    <p class="role-time">Khách hàng ID: ${customerName} | ${formatCurrency(order.totalAmount)}</p>
-                    <p class="role-time">Thời gian: ${timeStr} | Ngày ${date.toLocaleDateString('vi-VN')}</p>
+                    <p class="role-time">Khách hàng ID: \${customerName} | \${formatCurrency(order.totalAmount)}</p>
+                    <p class="role-time">Thời gian: \${timeStr} | Ngày \${date.toLocaleDateString('vi-VN')}</p>
                 </div>
             `;
         }).join('');
@@ -156,7 +186,9 @@ async function updateRecentOrders() {
     }
 }
 
-// Khởi chạy tất cả các hàm khi DOM load xong
+// ==========================
+// 8️⃣ Khởi chạy khi DOM load xong
+// ==========================
 document.addEventListener('DOMContentLoaded', () => {
     updateKpiCards();
     drawRevenueTrendChart();

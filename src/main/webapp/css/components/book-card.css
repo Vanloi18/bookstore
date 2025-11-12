@@ -15,7 +15,17 @@
     padding: 15px;
     text-align: center;
     transition: all 0.3s ease;
-    overflow: hidden;
+    
+    /* SỬA LỖI:
+      1. Thêm "display: flex" và "flex-direction: column"
+         để kích hoạt lớp "mt-auto" (margin-top: auto) trên nút của bạn.
+      2. Xóa "overflow: hidden" để tránh cắt mất nội dung.
+      3. Thêm "min-height" để đảm bảo card có đủ chỗ.
+    */
+    display: flex;
+    flex-direction: column;
+    min-height: 480px; /* Điều chỉnh con số này nếu cần */
+    /* "overflow: hidden;" đã bị xóa */
 }
 
 .book-card:hover {
@@ -35,6 +45,8 @@
     font-size: 1.1rem;
     margin: 8px 0 5px;
     color: #222;
+    /* Đảm bảo tiêu đề có chiều cao tối thiểu ngay cả khi chỉ có 1 dòng */
+    min-height: 2.2rem; 
 }
 
 .book-card .author {
@@ -49,20 +61,36 @@
     margin-bottom: 10px;
 }
 
-.book-card .btn-detail {
+/* SỬA LỖI:
+  File JSP của bạn dùng <button class="btn btn-dark ...">
+  nhưng file CSS này lại style cho class ".btn-detail".
+  
+  Chúng ta cần style cho form và button mà bạn *thực sự* đang dùng.
+*/
+.book-card form {
+    margin-top: auto; /* Đây là phần quan trọng nhất, đẩy form xuống dưới */
+}
+
+.book-card .btn {
+    /* Style cơ bản cho nút "Thêm vào giỏ" */
     display: inline-block;
-    background-color: #0071e3;
+    background-color: #0071e3; /* Màu xanh dương (có thể đổi thành #343a40 cho btn-dark) */
     color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
+    padding: 10px 16px;
+    border-radius: 50px; /* Tương ứng "rounded-pill" */
     font-size: 0.9rem;
     text-decoration: none;
     transition: background 0.3s;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 10px;	
 }
 
-.book-card .btn-detail:hover {
+.book-card .btn:hover {
     background-color: #005bb5;
 }
+
 
 .no-result {
     grid-column: 1 / -1;

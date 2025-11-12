@@ -1,47 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- File: add-book.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Thêm Sách Mới</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-    
+    <%-- ⚙️ Font + Icons + CSS đồng bộ với manage-books.jsp --%>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <%-- CSS Layout & Components --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/admin-layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components/button.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components/form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/books.css">
 </head>
 
-<body>
-   <div class="container admin-container">
-        <header class="main-header">
-    <div class="logo-section">
-       <a href="${pageContext.request.contextPath}/home" class="logo-text">
-        <span class="b-part">Book</span><span class="s-part">Store</span>
-            <img src="${pageContext.request.contextPath}/images/logo_icon.jpg" alt="icon" class="logo-icon">
-        </a>
-    </div>
+<body class="admin-body">
+    <%-- Sidebar trái --%>
+    <jsp:include page="admin-sidebar.jsp">
+        <jsp:param name="activePage" value="books"/>
+    </jsp:include>
 
-    <nav class="nav-links">
-        <a href="${pageContext.request.contextPath}/admin/dashboard">🧑‍💻TRANG ADMIN</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-books">📚 QUẢN LÝ SÁCH</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-categories">🏷️ QUẢN LÝ THỂ LOẠI</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-orders">🛒 QUẢN LÝ ĐƠN HÀNG</a>
-        <a href="${pageContext.request.contextPath}/home">🏠Trang chủ</a>
-    </nav>
-        </header>
+    <%-- Nội dung chính --%>
+    <div class="admin-main-content">
+        <jsp:include page="admin-header.jsp" />
 
-        <main>
-            <div class="form-container" style="max-width: 800px; text-align: left;">
-                <h2>Thêm Sách Mới</h2>
-                <hr>
-                
+        <div class="admin-page-content">
+            <h2><i class="fas fa-plus-circle"></i> Thêm Sách Mới</h2>
+
+            <div class="form-container form-container-large">
                 <form action="${pageContext.request.contextPath}/admin/add-book" method="post">
                     <div class="form-group">
                         <label for="title">Tiêu đề:</label>
                         <input type="text" id="title" name="title" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="author">Tác giả:</label>
                         <input type="text" id="author" name="author">
@@ -81,12 +79,18 @@
                         <label for="description">Mô tả:</label>
                         <textarea id="description" name="description" rows="5"></textarea>
                     </div>
-                    
-                    <button type="submit">Thêm Sách</button>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Thêm Sách</button>
+                        <a href="${pageContext.request.contextPath}/admin/manage-books" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
                 </form>
-                 <p style="margin-top: 20px;"><a href="${pageContext.request.contextPath}/admin/manage-books">Quay lại danh sách</a></p>
             </div>
-        </main>
+        </div>
+
+        <jsp:include page="admin-footer.jsp" />
     </div>
 </body>
 </html>

@@ -91,11 +91,12 @@ public class UserDAO {
      * @param user Đối tượng User chứa thông tin người dùng mới.
      */
     public void addUser(User user) {
-        String sql = "INSERT INTO users (username, password, fullname, email, address, phone) VALUES (?, ?, ?, ?, ?, ?)";
+        // SỬA CÂU SQL: Thêm cột 'isAdmin'
+        String sql = "INSERT INTO users (username, password, fullname, email, address, phone, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            // Sử dụng PasswordUtil để băm mật khẩu trước khi lưu
+            // Sử dụng PasswordUtil để băm mật khẩu
             String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
 
             ps.setString(1, user.getUsername());
@@ -104,6 +105,9 @@ public class UserDAO {
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getAddress());
             ps.setString(6, user.getPhone());
+            
+            // SỬA Ở ĐÂY: Thêm tham số cho isAdmin
+            ps.setBoolean(7, user.isAdmin()); // Lấy giá trị isAdmin từ đối tượng user
 
             ps.executeUpdate();
         } catch (SQLException e) {
