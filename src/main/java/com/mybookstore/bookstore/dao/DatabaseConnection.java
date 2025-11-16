@@ -8,7 +8,7 @@ public class DatabaseConnection {
     // THAY ĐỔI CÁC THÔNG SỐ NÀY CHO PHÙ HỢP VỚI CSDL CỦA BẠN
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/bookstore_db?serverTimezone=Asia/Ho_Chi_Minh";
     private static final String JDBC_USERNAME = "root"; // <-- ĐIỀN USERNAME CỦA BẠN
-    private static final String JDBC_PASSWORD = "123456"; // <-- ĐIỀN MẬT KHẨU CỦA BẠN
+    private static final String JDBC_PASSWORD = "root"; // <-- ĐIỀN MẬT KHẨU CỦA BẠN
 
     public static Connection getConnection() {
         Connection connection = null;

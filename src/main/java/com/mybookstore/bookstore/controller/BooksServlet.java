@@ -10,72 +10,73 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
-// Map servlet này với URL mới /books
 @WebServlet("/books")
 public class BooksServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
     private BookDAO bookDAO;
     private CategoryDAO categoryDAO;
-    private static final int BOOKS_PER_PAGE = 8; // Số sách trên mỗi trang
+
+    private static final int BOOKS_PER_PAGE = 8; // số sách mỗi trang
 
     public void init() {
         bookDAO = new BookDAO();
         categoryDAO = new CategoryDAO();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Luôn lấy danh sách thể loại cho sidebar
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Lấy thể loại
         List<Category> categoryList = categoryDAO.getAllCategories();
         request.setAttribute("categoryList", categoryList);
 
-        // Lấy tham số lọc và tìm kiếm
+        // Lấy tham số lọc
         String searchKeyword = request.getParameter("search");
         String categoryIdStr = request.getParameter("categoryId");
         int categoryId = 0;
+
         if (categoryIdStr != null && !categoryIdStr.isEmpty()) {
             try {
                 categoryId = Integer.parseInt(categoryIdStr);
-            } catch (NumberFormatException e) { /* Ignore */ }
+            } catch (NumberFormatException ignored) {}
         }
 
-        // Lấy số trang hiện tại (mặc định là 1)
+        // Lấy trang hiện tại
         String pageStr = request.getParameter("page");
         int currentPage = 1;
-        if (pageStr != null && !pageStr.isEmpty()) {
-            try {
+
+        try {
+            if (pageStr != null) {
                 currentPage = Integer.parseInt(pageStr);
-                if (currentPage < 1) currentPage = 1;
-            } catch (NumberFormatException e) { currentPage = 1; }
+            }
+        } catch (NumberFormatException e) {
+            currentPage = 1;
         }
 
-        // Đếm tổng số sách thỏa mãn điều kiện
+        // Tổng số sách
         int totalBooks = bookDAO.countTotalBooks(categoryId, searchKeyword);
-
-        // Tính tổng số trang
         int totalPages = (int) Math.ceil((double) totalBooks / BOOKS_PER_PAGE);
 
-        // Đảm bảo currentPage không vượt quá totalPages
-        if (currentPage > totalPages && totalPages > 0) {
-             currentPage = totalPages;
-        } else if (currentPage < 1) { // Đảm bảo currentPage không nhỏ hơn 1
-             currentPage = 1;
-        }
+        if (totalPages < 1) totalPages = 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
 
-
-        // Lấy danh sách sách cho trang hiện tại
+        // Lấy danh sách sách phân trang
         List<Book> bookList = bookDAO.getBooksPaginated(categoryId, searchKeyword, currentPage, BOOKS_PER_PAGE);
 
-        // Gửi các thuộc tính cần thiết tới JSP
+        // Set attribute
         request.setAttribute("bookList", bookList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
-        request.setAttribute("categoryId", categoryId); // Để giữ lại category khi chuyển trang
-        request.setAttribute("searchKeyword", searchKeyword); // Để giữ lại keyword khi chuyển trang
+        request.setAttribute("categoryId", categoryId);
+        request.setAttribute("searchKeyword", searchKeyword);
 
-        // Chuyển tiếp đến trang books.jsp mới
+        // Trả về JSP
         request.getRequestDispatcher("books.jsp").forward(request, response);
     }
 }

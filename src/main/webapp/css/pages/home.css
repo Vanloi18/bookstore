@@ -100,11 +100,12 @@ body {
 
 /* ===== Featured Books ===== */
 .book-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-	gap: 30px;
-	margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* CHUẨN 4 SÁCH / 1 HÀNG */
+    gap: 30px;
+    margin-top: 40px;
 }
+
 
 .book-item {
 	background: #ffffff;

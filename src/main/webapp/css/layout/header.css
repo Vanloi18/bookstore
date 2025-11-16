@@ -1,133 +1,193 @@
-/* ===== Header Apple-style ===== */
+/* ===== HEADER ===== */
 .main-header {
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #eaeaea;
     position: sticky;
     top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    transition: var(--transition);
+    z-index: 2000;
 }
 
-body[data-theme='dark'] .main-header {
-    background: rgba(28, 28, 30, 0.85);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* ===== Container ===== */
+/* Flex 3 cột trái - giữa - phải */
 .header-container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 14px 24px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
-/* ===== Brand ===== */
-.brand-link {
-    text-decoration: none;
-    color: var(--color-text);
-}
-
+/* -------- LOGO -------- */
 .brand-title {
     font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    transition: color 0.25s ease;
+    font-weight: 700;
+    color: #111;
 }
 
-.brand-title:hover {
-    color: var(--color-primary);
-}
-
-/* ===== Navigation ===== */
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.nav-links a {
+.brand-link {
     text-decoration: none;
-    color: var(--color-text-secondary);
+}
+
+/* -------- MENU GIỮA (CANH GIỮA THẬT SỰ) -------- */
+.header-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 32px; /* khoảng cách menu */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
     font-weight: 500;
-    transition: var(--transition);
+    color: #333;
+    font-size: 1rem;
+}
+
+.nav-menu a:hover {
+    color: #007bff;
+}
+
+/* -------- USER DROPDOWN -------- */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.user-dropdown {
     position: relative;
-}
-
-/* Gạch dưới khi hover hoặc active */
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    border-radius: 2px;
-    transition: 0.25s ease;
-    transform: translateX(-50%);
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 60%;
-}
-
-.nav-links a:hover {
-    color: var(--color-primary);
-}
-
-.user-greeting {
-    color: var(--color-text);
-    font-size: 0.95rem;
-}
-
-/* ===== Nút đăng xuất ===== */
-.logout-btn {
-    color: var(--color-danger);
-    font-weight: 500;
-}
-
-/* ===== Nút menu mobile ===== */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    color: var(--color-text);
     cursor: pointer;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
-    .nav-links {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 240px;
-        background: var(--color-surface);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding: 16px;
-        border-radius: 0 0 12px 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
+.user-icon {
+    font-size: 1.4rem;
+    color: #555;
+}
 
-    .nav-links.active {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
-    }
+/* Menu xổ xuống */
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 190px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background: #f5f5f5;
+}
+/* ========== USER DROPDOWN ========== */
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.user-icon {
+    font-size: 20px;
+}
+
+/* Dropdown menu */
+.user-dropdown .dropdown-menu {
+    position: absolute;
+    top: 40px;         /* đặt dưới trigger */
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 10px 0;
+    width: 180px;
+    opacity: 0;
+    pointer-events: none; /* không click được khi ẩn */
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    z-index: 99999;
+}
+
+/* Dropdown item */
+.dropdown-menu li {
+    padding: 8px 18px;
+}
+
+.dropdown-menu li:hover {
+    background: #f0f0f0;
+}
+
+.dropdown-menu a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hiển thị khi hover */
+.user-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto; /* cho phép click */
+    transform: translateY(0);
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+}
+/* =============================== */
+/* FIX LOGO BookWorld = no underline */
+/* =============================== */
+
+.brand-link {
+    text-decoration: none !important;   /* Bỏ gạch chân */
+    color: #111 !important;             /* Màu mặc định */
+    display: flex;
+    align-items: center;
+}
+
+.brand-link:hover {
+    color: #0078ff !important;          /* Màu xanh hover */
+}
+
+.brand-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.5px;
 }

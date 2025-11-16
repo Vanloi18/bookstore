@@ -6,6 +6,7 @@
     <title>Đặt Hàng Thành Công</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/checkout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />

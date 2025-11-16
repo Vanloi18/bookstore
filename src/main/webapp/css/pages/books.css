@@ -1,26 +1,17 @@
-/* ===== SHOP PAGE ===== */
+/* === SHOP PAGE === */
+
 .shop-container {
     width: 90%;
     max-width: 1200px;
     margin: 60px auto;
-    font-family: "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Header */
+/* header */
 .shop-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-}
-
-.section-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #111;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 /* Search bar */
@@ -37,21 +28,7 @@
     border: none;
     background: transparent;
     outline: none;
-    font-size: 1rem;
     flex: 1;
-}
-
-.search-bar button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #555;
-    font-size: 1.2rem;
-    transition: color 0.2s;
-}
-
-.search-bar button:hover {
-    color: #B3E0FF; /* XANH PASTEL: Màu hover nút tìm kiếm */
 }
 
 /* Layout chính */
@@ -63,95 +40,56 @@
 
 /* Sidebar */
 .sidebar h3 {
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #222;
+    margin-bottom: 12px;
 }
 
-.category-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.category-list li {
-    margin-bottom: 10px;
-}
-
-.category-list a {
-    color: #555;
-    text-decoration: none;
-    transition: color 0.2s;
-    display: inline-block;
-    padding: 4px 0;
-}
-
-.category-list a:hover,
-.category-list a.active {
-    color: #B3E0FF; /* XANH PASTEL: Màu hover và active danh mục */
+.category-list a.active,
+.category-list a:hover {
+    color: #80CCFF;
     font-weight: 600;
 }
 
-/* Book grid */
+/* BOOK GRID */
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 25px;
 }
 
 .book-card {
     background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
-    text-align: center;
     padding: 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    transition: 0.3s;
 }
 
 .book-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
 .book-card img {
+    height: 240px;
     width: 100%;
-    height: 250px;
-    object-fit: cover;
     border-radius: 12px;
-    margin-bottom: 10px;
+    object-fit: cover;
 }
 
-.book-card h4 {
-    font-size: 1rem;
-    color: #111;
-    margin: 8px 0 4px;
-}
-
-.book-card .author {
-    color: #777;
-    font-size: 0.9rem;
-}
-
-.book-card .price {
-    color: #B3E0FF; /* XANH PASTEL: Màu giá sách */
-    font-weight: 600;
-    margin: 6px 0 12px;
-}
-
-.btn-detail {
-    background: #B3E0FF; /* XANH PASTEL: Nền nút Chi tiết */
-    color: #111; /* Đổi màu chữ sang màu tối để dễ đọc */
-    text-decoration: none;
-    padding: 8px 16px;
+/* Nút giỏ hàng */
+.btn-cart {
+    background: #80CCFF;
+    padding: 8px 14px;
+    color: #fff;
     border-radius: 999px;
-    transition: background 0.2s ease;
 }
 
-.btn-detail:hover {
-    background: #80CCFF; /* XANH PASTEL: Nền nút Chi tiết hover */
+.btn-cart:hover {
+    background: #4ab1ff;
 }
 
-/* Pagination */
+/* ===== PHÂN TRANG ===== */
 .pagination {
     text-align: center;
     margin: 40px 0;
@@ -161,191 +99,27 @@
     display: inline-flex;
     list-style: none;
     gap: 6px;
-    padding: 0;
 }
 
 .pagination li a,
 .pagination li span {
-    display: block;
     padding: 8px 14px;
+    background: #fff;
     border-radius: 6px;
-    text-decoration: none;
-    color: #555;
     border: 1px solid #ddd;
-    transition: background 0.2s, color 0.2s;
+    color: #555;
+    text-decoration: none;
+    transition: 0.25s;
 }
 
 .pagination li a:hover {
-    background: #B3E0FF; /* XANH PASTEL: Nền nút phân trang hover */
-    color: #111; /* Đổi màu chữ */
+    background: #80CCFF;
+    color: #fff;
 }
 
 .pagination li.active span {
-    background: #B3E0FF; /* XANH PASTEL: Nền nút phân trang active */
+    background: #80CCFF;
     color: #fff;
-    font-weight: 600;
-}
-
-.no-result {
-    text-align: center;
-    color: #777;
-    font-style: italic;
-    margin-top: 40px;
-}
-/* ===== Hiệu ứng sang kiểu Apple ===== */
-
-/* Toàn trang fade-in khi load (Không đổi) */
-body {
-    animation: fadeIn 0.6s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Ảnh sách phóng nhẹ & sáng hơn khi hover (Không đổi) */
-.book-card img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.book-card:hover img {
-    transform: scale(1.04);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-}
-
-/* Hiệu ứng hover nổi nhẹ toàn card (Không đổi) */
-.book-card {
-    transition: all 0.3s ease;
-}
-
-.book-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-/* Hiệu ứng nút mượt mà */
-.btn-detail {
-    /* GRADIENT XANH PASTEL */
-    background: linear-gradient(145deg, #B3E0FF, #80CCFF);
-    box-shadow: 0 4px 8px rgba(179, 224, 255, 0.5); /* Box shadow pastel hơn */
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.btn-detail:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 14px rgba(179, 224, 255, 0.7); /* Box shadow pastel hover */
-}
-
-/* Tiêu đề fade-in chậm hơn 1 chút (Không đổi) */
-.section-title {
-    animation: slideDown 0.8s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Sidebar hover nhẹ */
-.category-list a {
-    position: relative;
-}
-
-.category-list a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #B3E0FF; /* XANH PASTEL: Thanh gạch chân danh mục */
-    transition: width 0.25s ease;
-}
-
-.category-list a:hover::after,
-.category-list a.active::after {
-    width: 100%;
-}
-
-/* Pagination hover mượt hơn (Không đổi) */
-.pagination li a {
-    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
-}
-
-.pagination li a:hover {
-    transform: translateY(-2px);
-}
-/* ========================================================= */
-/* books.css - CSS riêng cho trang Quản lý Sách */
-/* ========================================================= */
-
-.admin-page-content h2 {
-    font-size: 1.8em;
+    border-color: #80CCFF;
     font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--color-text-dark);
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.admin-page-content h2 i {
-    margin-right: 10px;
-    color: #495057;
-}
-
-.action-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.search-filter {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.input-search {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    width: 250px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.input-search:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-    outline: none;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .action-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .input-search {
-        width: 100%;
-    }
 }

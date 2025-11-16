@@ -9,6 +9,7 @@
 <title>Giỏ Hàng của bạn</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
 </head>
 <body>
     <jsp:include page="header.jsp">

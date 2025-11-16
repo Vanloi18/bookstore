@@ -2,20 +2,28 @@
 
 <footer class="main-footer">
     <div class="footer-container">
+
+        <!-- Logo & Brand -->
         <div class="footer-logo">
-            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo" class="footer-logo-img">
+            <img src="${pageContext.request.contextPath}/images/logo-new.png" 
+                 alt="Logo Nhà Sách Online" class="footer-logo-img">
             <h3>Nhà Sách Online</h3>
         </div>
 
+        <!-- Navigation Links -->
         <div class="footer-links">
             <a href="${pageContext.request.contextPath}/home">Trang chủ</a>
-            <a href="${pageContext.request.contextPath}/products">Sản phẩm</a>
-            <a href="${pageContext.request.contextPath}/about">Giới thiệu</a>
-            <a href="${pageContext.request.contextPath}/contact">Liên hệ</a>
+            <a href="${pageContext.request.contextPath}/books">Sản phẩm</a>
+            <a href="${pageContext.request.contextPath}/home">Giới thiệu</a>
         </div>
 
+        <!-- Contact -->
         <div class="footer-contact">
-            <p>Email: <a href="mailto:contact@nhasachonline.com">contact@nhasachonline.com</a></p>
+            <p>Email: 
+                <a href="mailto:contact@nhasachonline.com">
+                    contact@nhasachonline.com
+                </a>
+            </p>
             <p>Hotline: 0123 456 789</p>
         </div>
     </div>

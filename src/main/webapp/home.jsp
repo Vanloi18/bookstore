@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nhà Sách Online - Khám Phá Thế Giới Qua Từng Trang Sách</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
-/* CSS NÀY BẮT BUỘC PHẢI Ở TRONG FILE .JSP ĐỂ CÚ PHÁP SERVER HOẠT ĐỘNG */
+
 .hero-section {
-    /* Đảm bảo đường dẫn ảnh của bạn là đúng */
     background: url('${pageContext.request.contextPath}/images/hero-background1.jpg') no-repeat center center;
     background-size: cover;
     
@@ -54,6 +54,8 @@
 .hero-section .cta-button {
     color: #1d1d1f; /* Giữ chữ tối cho nút CTA */
 }
+
+
 </style>
 <body>
 	<jsp:include page="header.jsp" />
@@ -97,7 +99,7 @@
 				tục với giá cả phải chăng, cùng trải nghiệm mua sắm trực tuyến tiện
 				lợi và nhanh chóng nhất.</p>
 		</section>
-
+<div class="container">
 		<section class="section" id="featured-books-section">
 			<h2 class="section-title">Sách Nổi Bật</h2>
 
@@ -141,8 +143,8 @@
 					class="cta-button">Xem Tất Cả Sách</a>
 			</div>
 		</section>
+</div>
 	<%-- Các Section của Landing Page --%>
-	<div class="container">
 		<section class="hero-section">
 			<h2>Khám Phá Thế Giới Tri Thức Vô Tận Với Nhiều Ưu Đãi</h2>
 			<p>Tìm thấy cuốn sách yêu thích của bạn từ hàng ngàn tựa sách đa
@@ -152,6 +154,7 @@
 			<a href="${pageContext.request.contextPath}/books" class="cta-button">KHÁM
 				PHÁ SÁCH NGAY</a>
 		</section>
+<div class="container">
 	<section class="section" id="featured-books-section">
 			<h2 class="section-title">Sách Bán Chạy</h2>
 
@@ -195,6 +198,7 @@
 					class="cta-button">Xem Tất Cả Sách</a>
 			</div>
 		</section>
+	</div>
 		<section class="section">
 			<h2 class="section-title">Tại Sao Chọn BookStore?</h2>
 			<div class="why-choose-us-grid">
@@ -243,21 +247,6 @@
 			</div>
 		</section>
 
-		<%-- Form đăng ký nhận tin (CTA) --%>
-		<section class="cta-bar-form">
-			<h3>Đừng Bỏ Lỡ Ưu Đãi Đặc Biệt!</h3>
-			<p>Đăng ký nhận bản tin của chúng tôi để cập nhật những đầu sách
-				mới nhất và nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên!</p>
-			<form action="${pageContext.request.contextPath}/subscribe"
-				method="post">
-				<input type="text" name="name" placeholder="Họ và Tên của bạn"
-					required> <input type="email" name="email"
-					placeholder="Email nhận ưu đãi" required>
-				<button type="submit">ĐĂNG KÝ NGAY</button>
-			</form>
-		</section>
-
-	</div>
 	<%-- Đóng container cho landing page sections --%>
 
 	<jsp:include page="footer.jsp" />

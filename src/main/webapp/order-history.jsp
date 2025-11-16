@@ -9,6 +9,7 @@
     <title>Lịch Sử Đơn Hàng</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/user-profile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
 </head>
 <body>
     <jsp:include page="header.jsp">
