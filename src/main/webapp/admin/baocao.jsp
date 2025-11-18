@@ -17,36 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components/table.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/report-styles.css">
 
-    <style>
-        /* Đảm bảo layout không bị trôi */
-        .admin-main-content {
-            margin-left: 250px;
-            padding: 20px;
-        }
-        .admin-page-content {
-            background: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            min-height: 100vh;
-        }
-        .filter-actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        }
-        .chart-card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        canvas {
-            width: 100% !important;
-            height: auto !important;
-        }
-    </style>
 </head>
 
 <body class="admin-body">
@@ -63,20 +33,7 @@
             <h2><i class="fas fa-chart-line"></i> Báo cáo / Thống kê</h2>
             <p>Tổng quan và phân tích dữ liệu bán hàng</p>
 
-            <!-- Bộ lọc -->
-            <div class="filter-actions">
-                <select class="form-control filter-select">
-                    <option>30 ngày gần nhất</option>
-                    <option>7 ngày gần nhất</option>
-                    <option>90 ngày gần nhất</option>
-                </select>
-                <select class="form-control filter-select">
-                    <option>Tất cả thể loại</option>
-                </select>
-                <button class="btn btn-success btn-export excel"><i class="fas fa-file-excel"></i> Xuất Excel</button>
-                <button class="btn btn-danger btn-export pdf"><i class="fas fa-file-pdf"></i> Xuất PDF</button>
-            </div>
-
+  
             <!-- KPI Cards -->
             <div class="row kpi-row">
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -86,7 +43,7 @@
                             <div class="kpi-detail">
                                 <h4 id="kpi-total-orders">0</h4>
                                 <p>Tổng đơn hàng</p>
-                                <span class="change-rate text-success">+0%</span>
+                             
                             </div>
                         </div>
                     </div>
@@ -99,7 +56,7 @@
                             <div class="kpi-detail">
                                 <h4 id="kpi-total-revenue">0</h4>
                                 <p>Tổng doanh thu (30 ngày)</p>
-                                <span class="change-rate text-success">+0%</span>
+                              
                             </div>
                         </div>
                     </div>
@@ -112,7 +69,7 @@
                             <div class="kpi-detail">
                                 <h4 id="kpi-books-sold">0</h4>
                                 <p>Sách đã bán</p>
-                                <span class="change-rate text-success">+0%</span>
+
                             </div>
                         </div>
                     </div>
@@ -125,23 +82,13 @@
                             <div class="kpi-detail">
                                 <h4 id="kpi-conversion-rate">0%</h4>
                                 <p>Tỷ lệ chuyển đổi</p>
-                                <span class="change-rate text-success">+0%</span>
+                              
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Charts -->
-            <div class="row charts-row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card chart-card">
-                        <div class="card-header">Xu hướng Doanh thu (7 ngày gần nhất)</div>
-                        <div class="card-body">
-                            <canvas id="revenueTrendChart"></canvas>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col-lg-6 mb-4">
                     <div class="card chart-card">
@@ -156,27 +103,6 @@
                 </div>
             </div>
 
-            <!-- Stats -->
-            <div class="row stats-row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card chart-card">
-                        <div class="card-header">Thống kê Trạng thái Đơn hàng</div>
-                        <div class="card-body">
-                            <canvas id="orderStatusChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-4">
-                    <div class="card list-card">
-                        <div class="card-header">Đơn hàng gần đây</div>
-                        <div class="card-body" id="recent-orders-list">
-                            <p class="text-center text-muted">Đang tải...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <jsp:include page="admin-footer.jsp" />
     </div>

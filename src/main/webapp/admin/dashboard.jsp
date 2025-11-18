@@ -12,125 +12,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
           integrity="sha512-..." crossorigin="anonymous" />
-          
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/admin-dashboard.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/admin-layout.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/admin-dashboard.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
 
-/* ĐÃ SỬA LỖI CÚ PHÁP CSS BỔ SUNG TRONG STYLE TAG */
-.chart-container { 
-    margin-top: 30px; 
-    background: #fff; 
-    padding: 20px; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: 400px; /* Đảm bảo chiều cao tối thiểu cho biểu đồ hiển thị tốt */
-}
-/* Định kiểu tiêu đề bảng (header) */
-
-.list-card .card-header h2 {
-
-font-size: 1.2em;
-
-font-weight: 600;
-
-margin-top: 0;
-
-margin-bottom: 15px;
-
-padding-bottom: 10px;
-
-border-bottom: 1px solid #f1f1f1;
-
-}
-
-/* Trong admin-dashboard.css (hoặc table.css) */
-
-
-
-.list-card .table {
-
-width: 100%;
-
-border-collapse: collapse; /* Gộp các đường viền bảng */
-
-margin-bottom: 0;
-
-}
-.list-card .table th,
-.list-card .table td {
-
-padding: 10px 0; /* Giảm padding ngang (hoặc thêm nếu cần) */
-text-align: left;
-/* Phân chia các cột */
-width: 50%; /* Có thể dùng để chia đều Tên Sách và Số Lượng Bán */
-border-bottom: 1px solid #eee; /* Đường kẻ phân cách hàng */
-
-}
-
-.list-card .table th {
-
-font-weight: 700;
-color: #6c757d;
-text-transform: uppercase;
-font-size: 0.85em;
-}
-
-/* ĐÃ SỬA LỖI CÚ PHÁP CSS BỔ SUNG TRONG STYLE TAG */
-
-.chart-container {
-
-margin-top: 30px;
-background: #fff;
-padding: 20px;
-border-radius: 8px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-height: 400px; /* Đảm bảo chiều cao tối thiểu cho biểu đồ hiển thị tốt */
-
-}
-
-/* Ví dụ: Thêm vào cuối admin-layout.css hoặc admin-dashboard.css */
-
-/* Đảm bảo nội dung chính nằm sau sidebar */
-
-.admin-main-content {
-
-margin-left: 230px !important; /* Dùng !important nếu bị ghi đè */
-
-padding-top: 60px; /* Đảm bảo không bị chèn bởi Header (height: 60px) */
-
-}
-
-/* Đảm bảo vùng nội dung trang có padding bên trái */
-
-.admin-page-content {
-
-/* ... */
-
-padding: 25px 40px; /* Đảm bảo padding trái lớn hơn 20px */
-
-} 
-/* Căn lề phải cho phần Top 5 Sách và Đơn hàng gần đây */
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 250px;   /* 👈 Lùi toàn bộ sang phải bằng với phần nội dung chính */
-    margin-right: 40px;
-    gap: 30px;            /* Tạo khoảng cách giữa 2 cột */
-}
-
-/* Cố định độ rộng của mỗi khối */
-.stats-row .list-card {
-    flex: 1;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-</style>
 </head>
 <body class="admin-body">
 
@@ -224,21 +110,7 @@ padding: 25px 40px; /* Đảm bảo padding trái lớn hơn 20px */
         </div>
     </div>
     
-    <%-- Cột 2: Đơn hàng Gần đây --%>
-    <div class="list-card">
-        <div class="card-header">
-            <h2><i class="fas fa-history"></i> Đơn hàng Gần đây</h2>
-        </div>
-        <div class="card-body">
-            <%-- Cần bổ sung logic lặp qua danh sách đơn hàng gần đây --%>
-            <p class="text-center text-muted">Cần bổ sung logic cho Đơn hàng Gần đây</p>
-        </div>
-    </div>
-    
-</div>
-
-		<%-- Footer dùng chung cho admin --%>
-		<jsp:include page="admin-footer.jsp" />
+	
 	</div>
 
 
@@ -282,5 +154,7 @@ padding: 25px 40px; /* Đảm bảo padding trái lớn hơn 20px */
             });
         });
 	</script>
+		<%-- Footer dùng chung cho admin --%>
+		<jsp:include page="admin-footer.jsp" />
 </body>
 </html>
