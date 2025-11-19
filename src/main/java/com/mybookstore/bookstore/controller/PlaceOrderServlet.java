@@ -49,7 +49,7 @@ public class PlaceOrderServlet extends HttpServlet {
         for (CartItem item : cart.values()) {
             totalAmount += item.getSubtotal();
         }
-
+ 
         // 2. Tạo đối tượng Order và lưu vào CSDL
         Order order = new Order();
         order.setUserId(loggedInUser.getId());

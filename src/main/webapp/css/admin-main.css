@@ -1,5 +1,34 @@
-@import url('base/reset.css');
+/*
+ * FILE: css/admin-main.css
+ * MỤC ĐÍCH: Tập hợp tất cả CSS cần thiết cho giao diện quản trị (Admin Layout + Components + Pages)
+ */
+
+/* 1. BASE (Cần thiết cho biến và reset) */
+@import url('base/reset.css');	
 @import url('base/variables.css');
+@import url('base/typography.css'); /* QUAN TRỌNG: Định nghĩa font chữ, h1, h2, a */
+@import url('base/utilities.css');  /* QUAN TRỌNG: Các class hỗ trợ (mt-auto, text-center,...) */
+@import url('base/animation.css');  /* QUAN TRỌNG: Các hiệu ứng chuyển động */
+
+/* 2. LAYOUT ADMIN (Cấu trúc Sidebar, Header, Footer) */
 @import url('layout/admin-layout.css');
+
+/* 3. COMPONENTS (Dùng chung cho tất cả các trang) */
+@import url('components/button.css');    /* RẤT QUAN TRỌNG: Nút bấm */
+@import url('components/form.css');      /* RẤT QUAN TRỌNG: Input, label, form-group */
+@import url('components/card.css');      /* RẤT QUAN TRỌNG: Card chung */
 @import url('components/table.css');
+@import url('components/pagination.css');
+@import url('components/modal.css');     /* QUAN TRỌNG: Nếu Admin có Modal */
+
+/* 4. PAGES ADMIN (Style riêng từng trang) */
 @import url('pages/admin-dashboard.css');
+@import url('pages/orders.css');        /* Style cho trang Quản lý Đơn hàng */
+@import url('pages/users.css');         /* Style cho trang Quản lý Người dùng */
+/* Nếu có file style cho Add/Edit Book, cần import ở đây. */
+/* @import url('pages/style_add_book.css'); */
+/* @import url('pages/reports.css'); */
+
+/* 5. VENDORS (Thư viện bên ngoài) */
+/* Cần link Font Awesome và Bootstrap ở thẻ <link> trong JSP thay vì import ở đây. */
+/* @import url('vendors/fontawesome.css'); */

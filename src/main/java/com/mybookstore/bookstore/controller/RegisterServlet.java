@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
             // Nếu chưa, tạo người dùng mới và thêm vào CSDL
             User newUser = new User();
             newUser.setUsername(username);
-            newUser.setPassword(pass); // Cần mã hóa mật khẩu trong thực tế
+            newUser.setPassword(pass); 
             newUser.setFullname(fullname);
             newUser.setEmail(email);
             newUser.setAddress(address);
