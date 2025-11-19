@@ -123,3 +123,41 @@
     border-color: #80CCFF;
     font-weight: 700;
 }
+ .toast-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Đảm bảo book-card luôn xếp dạng cột */
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Form thêm giỏ hàng phải full width */
+.add-to-cart-form {
+    margin-top: auto;        /* đẩy nút xuống cuối card */
+    width: 100%;
+}
+
+/* Nút trong form phải full width */
+.add-to-cart-form .btn-cart {
+    width: 100%;
+    display: block;
+    text-align: center;
+}

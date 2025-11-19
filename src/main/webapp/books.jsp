@@ -11,11 +11,12 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/books.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/books.css">
+
 </head>
 
 <body>
@@ -28,7 +29,7 @@
         <!-- Header khu vực Sách -->
         <div class="shop-header">
             <h2 class="section-title"><i class="fa-solid fa-book"></i> Tất Cả Sách</h2>
-
+<!-- Tìm sách  -->
             <form action="${pageContext.request.contextPath}/books" method="get" class="search-bar">
                 <input type="text" name="search"
                        placeholder="Tìm sách theo tên, tác giả..."
@@ -76,11 +77,9 @@
                             <fmt:formatNumber value="${book.price}" type="number"/> VNĐ
                         </p>
 
-                        <form action="${pageContext.request.contextPath}/add-to-cart" method="post">
-                            <input type="hidden" name="bookId" value="${book.id}">
-                            <input type="hidden" name="quantity" value="1">
-
-                            <button type="submit" class="btn-cart">
+                        <!-- FORM THÊM GIỎ HÀNG BẰNG AJAX -->
+                        <form class="add-to-cart-form" data-id="${book.id}">
+                            <button type="button" class="btn-cart">
                                 <i class="fa fa-cart-plus"></i> Thêm vào giỏ
                             </button>
                         </form>
@@ -148,6 +147,57 @@
     </main>
 
     <jsp:include page="footer.jsp" />
+
+    <!-- ======================= AJAX ADD TO CART ======================= -->
+    <script>
+    document.querySelectorAll(".add-to-cart-form").forEach(form => {
+        const btn = form.querySelector("button");
+
+        btn.addEventListener("click", async function () {
+            const bookId = form.getAttribute("data-id");
+
+            try {
+                const response = await fetch("${pageContext.request.contextPath}/add-to-cart", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "bookId=" + encodeURIComponent(bookId) + "&quantity=1"
+                });
+
+                const text = await response.text();
+                const count = parseInt(text) || 0;
+
+                // Cập nhật badge giỏ hàng trên header
+                const badge = document.querySelector(".cart-count");
+                if (badge) {
+                    badge.textContent = count;
+                    badge.classList.add("bump");
+                    setTimeout(() => badge.classList.remove("bump"), 200);
+                }
+
+                showToast("Đã thêm vào giỏ hàng!");
+
+            } catch (e) {
+                showToast("Có lỗi khi thêm vào giỏ hàng!");
+            }
+        });
+    });
+
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast-message";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add("show"), 10);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+    </script>
 
 </body>
 </html>

@@ -13,50 +13,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout/header.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/home.css">
+
 </head>
-<style>
 
-.hero-section {
-    background: url('${pageContext.request.contextPath}/images/hero-background1.jpg') no-repeat center center;
-    background-size: cover;
-    
-    /* Loại bỏ gradient cũ và giữ các thuộc tính khác từ main.css */
-    border-radius: 28px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    margin-bottom: 80px;
-    padding: 120px 20px; /* Giữ padding để nội dung có không gian */
-    
-    /* Tùy chỉnh độ mờ/sáng cho ảnh: Thêm một lớp phủ tối nhẹ */
-    position: relative;
-    z-index: 1; /* Đảm bảo nội dung nằm trên lớp phủ */
-}
-
-/* TẠO LỚP PHỦ NỀN TỐI (OVERLAY) ĐỂ CHỮ NỔI BẬT HƠN TRÊN NỀN ẢNH */
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Lớp phủ đen 30% */
-    border-radius: 28px;
-    z-index: 2;
-}
-
-/* Đảm bảo chữ nằm trên lớp phủ và có màu trắng */
-.hero-section h2, .hero-section p, .hero-section .cta-button {
-    position: relative; /* Đẩy nội dung lên trên lớp phủ */
-    z-index: 3;
-    color: #fff; /* Chữ trắng */
-}
-/* Hoàn tác lại màu của CTA button nếu bạn muốn nó giữ màu pastel */
-.hero-section .cta-button {
-    color: #1d1d1f; /* Giữ chữ tối cho nút CTA */
-}
-
-
-</style>
 <body>
 	<jsp:include page="header.jsp" />
 
@@ -103,7 +63,6 @@
 		<section class="section" id="featured-books-section">
 			<h2 class="section-title">Sách Nổi Bật</h2>
 
-			<%-- (1) SỬA LỖI: Bỏ <section class="book-grid"> lồng nhau --%>
 			<div class="book-grid">
 				<c:if test="${not empty featuredBookList}">
 					<c:forEach items="${featuredBookList}" var="book">
@@ -120,19 +79,16 @@
 								VNĐ
 							</p>
 							<%-- Nút Thêm vào Giỏ hàng --%>
-	                   <form action="${pageContext.request.contextPath}/add-to-cart" method="post" style="display:inline;">
-		                        <input type="hidden" name="bookId" value="${book.id}">
-		                        <input type="hidden" name="quantity" value="1"> <%-- Mặc định thêm 1 sản phẩm --%>
-		                        <button type="submit" class="btn btn-dark rounded-pill px-3 py-1 mt-auto">
-			                    <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
-		                 </button>
-	                     </form>
+	                  <form class="home-add-cart" data-id="${book.id}">
+    <button type="button" class="btn btn-dark rounded-pill px-3 py-1 mt-auto">
+        <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
+    </button>
+</form>
+
 	                					</div>
 					</c:forEach>
-					<%-- (2) SỬA LỖI: Xóa bỏ <c:if empty> bị lồng sai (dead code) --%>
 				</c:if>
 
-				<%-- (4) TỐI ƯU: Thay thế style nội tuyến bằng class --%>
 				<c:if test="${empty featuredBookList}">
 					<p class="no-books-message">Hiện chưa có sách bán chạy nào.</p>
 				</c:if>
@@ -155,7 +111,7 @@
 				PHÁ SÁCH NGAY</a>
 		</section>
 <div class="container">
-	<section class="section" id="featured-books-section">
+		<section class="section" id="featured-books-section">
 			<h2 class="section-title">Sách Bán Chạy</h2>
 
 			<%-- (1) SỬA LỖI: Bỏ <section class="book-grid"> lồng nhau --%>
@@ -175,13 +131,12 @@
 								VNĐ
 							</p>
 							<%-- Nút Thêm vào Giỏ hàng --%>
-	                   <form action="${pageContext.request.contextPath}/add-to-cart" method="post" style="display:inline;">
-		                        <input type="hidden" name="bookId" value="${book.id}">
-		                        <input type="hidden" name="quantity" value="1"> <%-- Mặc định thêm 1 sản phẩm --%>
-		                        <button type="submit" class="btn btn-dark rounded-pill px-3 py-1 mt-auto">
-			                    <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
-		                 </button>
-	                     </form>
+	                  <form class="home-add-cart" data-id="${book.id}">
+    <button type="button" class="btn btn-dark rounded-pill px-3 py-1 mt-auto">
+        <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
+    </button>
+</form>
+
 	                					</div>
 					</c:forEach>
 					<%-- (2) SỬA LỖI: Xóa bỏ <c:if empty> bị lồng sai (dead code) --%>
@@ -198,7 +153,7 @@
 					class="cta-button">Xem Tất Cả Sách</a>
 			</div>
 		</section>
-	</div>
+</div>
 		<section class="section">
 			<h2 class="section-title">Tại Sao Chọn BookStore?</h2>
 			<div class="why-choose-us-grid">
@@ -253,5 +208,53 @@
 
 	<%-- (3) TỐI ƯU: Chuyển JS ra file riêng --%>
 	<script src="${pageContext.request.contextPath}/js/home-slider.js"></script>
+	<script>
+document.querySelectorAll(".home-add-cart").forEach(form => {
+    const btn = form.querySelector("button");
+
+    btn.addEventListener("click", async function () {
+        const bookId = form.getAttribute("data-id");
+
+        try {
+            const response = await fetch("${pageContext.request.contextPath}/add-to-cart", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "bookId=" + encodeURIComponent(bookId) + "&quantity=1"
+            });
+
+            const text = await response.text();
+            const count = parseInt(text) || 0;
+
+            // cập nhật badge giỏ hàng
+            const badge = document.querySelector(".cart-count");
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.add("bump");
+                setTimeout(() => badge.classList.remove("bump"), 200);
+            }
+
+            showToast("Đã thêm vào giỏ hàng!");
+
+        } catch (e) {
+            showToast("Lỗi không thêm được sản phẩm!");
+        }
+    });
+});
+
+function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast-message";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 10);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
+</script>
+	
 </body>
 </html>

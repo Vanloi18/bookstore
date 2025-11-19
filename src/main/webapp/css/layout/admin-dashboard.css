@@ -1,0 +1,207 @@
+/* ========================================================= */
+/* admin-dashboard.css - CSS riêng cho Dashboard */
+/* ========================================================= */
+
+/* Màu phụ */
+:root {
+    --color-success: #28a745;
+    --color-orange: #ffc107;
+    --color-info: #17a2b8;
+    --sidebar-width: 230px;
+}
+
+/* ======================= */
+/* DASHBOARD STAT CARDS    */
+/* ======================= */
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.dashboard-cards .card {
+    background: #fff;
+    padding: 15px 18px;
+    border-radius: 8px;
+    min-height: 120px;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--color-info);
+    transition: 0.25s ease;
+}
+
+.dashboard-cards .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 14px rgba(0,0,0,0.12);
+}
+
+.dashboard-cards .card h3 {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.dashboard-cards .card-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+/* Card màu theo loại */
+.card.revenue { border-left-color: var(--color-success); }
+.card.users { border-left-color: var(--color-primary); }
+.card.books { border-left-color: var(--color-orange); }
+
+/* ======================= */
+/* BIỂU ĐỒ DOANH THU       */
+/* ======================= */
+
+.chart-container {
+    margin-top: 30px;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+    width: 100%;
+    min-height: 350px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 350px;
+}
+
+/* ======================= */
+/* TOP 5 SÁCH BÁN CHẠY     */
+/* ======================= */
+
+.stats-row {
+    display: flex;
+    justify-content: space-evenly;  /* ⭐ chia đều khoảng cách 2 bên */
+    gap: 30px;
+
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 40px; 
+    margin-right: 10px;
+}
+
+
+.list-card {
+    flex: 1;
+    background: #fff;
+    padding: 22px 25px;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+}
+
+.list-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+/* Header */
+.list-card .card-header h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-card .card-header h2 i {
+    font-size: 20px;
+    color: #007bff;
+}
+
+/* Bảng dữ liệu */
+.list-card .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list-card .table th {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6c757d;
+    padding: 10px 0;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.list-card .table td {
+    padding: 12px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.list-card .table tbody tr:hover {
+    background: #f8f9fa;
+    transition: 0.2s;
+}
+
+/* Cột STT */
+.list-card .table td:first-child,
+.list-card .table th:first-child {
+    width: 50px;
+}
+
+/* Tên sách */
+.list-card .table td:nth-child(2),
+.list-card .table th:nth-child(2) {
+    width: 60%;
+    font-weight: 600;
+}
+
+/* Số lượng */
+.list-card .table td:last-child {
+    font-weight: 700;
+    color: #007bff;
+}
+
+/* Không có dữ liệu */
+.list-card .text-muted {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+}
+
+/* ======================= */
+/* RESPONSIVE */
+/* ======================= */
+
+@media (max-width: 992px) {
+    .stats-row {
+        flex-direction: column;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}

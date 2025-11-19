@@ -23,11 +23,11 @@ public class AddToCartServlet extends HttpServlet {
         bookDAO = new BookDAO();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         HttpSession session = request.getSession();
 
-        // Lấy giỏ hàng từ session. Nếu chưa có, tạo mới.
-        // Giỏ hàng sẽ là một Map<Integer, CartItem> với Key là ID của sách.
         @SuppressWarnings("unchecked")
         Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
         if (cart == null) {
@@ -35,33 +35,35 @@ public class AddToCartServlet extends HttpServlet {
         }
 
         try {
-            // Lấy thông tin từ form
             int bookId = Integer.parseInt(request.getParameter("bookId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-            // Lấy thông tin sách từ CSDL
             Book book = bookDAO.getBookById(bookId);
 
             if (book != null && quantity > 0) {
                 CartItem cartItem = cart.get(bookId);
+
                 if (cartItem != null) {
-                    // Nếu sách đã có trong giỏ, cập nhật số lượng
                     cartItem.setQuantity(cartItem.getQuantity() + quantity);
                 } else {
-                    // Nếu sách chưa có trong giỏ, thêm mới
                     cart.put(bookId, new CartItem(book, quantity));
                 }
             }
 
-            // Lưu giỏ hàng đã cập nhật trở lại session
             session.setAttribute("cart", cart);
 
-            // Chuyển hướng đến trang xem giỏ hàng
-            response.sendRedirect("cart.jsp");
+            // Trả về tổng số lượng item trong giỏ
+            int totalItems = 0;
+            for (CartItem item : cart.values()) {
+                totalItems += item.getQuantity();
+            }
 
-        } catch (NumberFormatException e) {
-            // Xử lý nếu id hoặc quantity không phải là số
-            response.sendRedirect("home");
+            response.setContentType("text/plain");
+            response.getWriter().write(String.valueOf(totalItems));
+
+        } catch (Exception e) {
+            response.setContentType("text/plain");
+            response.getWriter().write("0");
         }
     }
 }

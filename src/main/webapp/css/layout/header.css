@@ -1,68 +1,108 @@
-/* ===== HEADER ===== */
+/* --- HEADER CSS --- */
+
+/* Header khung */
 .main-header {
     width: 100%;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #eaeaea;
+    background: #ffffff;
+    padding: 15px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
-    z-index: 2000;
+    z-index: 999;
 }
 
-/* Flex 3 cột trái - giữa - phải */
+/* Bố cục bên trong */
 .header-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 14px 24px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
-/* -------- LOGO -------- */
+
+/* ---------------- LOGO ---------------- */
+.header-left .brand-link,
+.header-left .brand-link:visited,
+.header-left .brand-link:active,
+.header-left .brand-link:hover {
+    text-decoration: none !important;
+}
+
 .brand-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #111;
+    font-size: 26px;
+    font-weight: bold;
+    color: #ff4d4f;
+    transition: color 0.2s ease;
 }
 
-.brand-link {
-    text-decoration: none;
+.header-left .brand-link:hover .brand-title {
+    color: #007bff !important;
 }
 
-/* -------- MENU GIỮA (CANH GIỮA THẬT SỰ) -------- */
-.header-center {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-}
 
+/* ---------------- NAV MENU ---------------- */
 .nav-menu {
-    list-style: none;
     display: flex;
-    gap: 32px; /* khoảng cách menu */
-    margin: 0;
-    padding: 0;
+    gap: 25px;
+    list-style: none;
 }
 
 .nav-menu a {
     text-decoration: none;
-    font-weight: 500;
+    font-size: 17px;
     color: #333;
-    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .nav-menu a:hover {
     color: #007bff;
 }
 
-/* -------- USER DROPDOWN -------- */
+
+/* ---------------- RIGHT ZONE ---------------- */
 .header-right {
     display: flex;
-    justify-content: flex-end;
-    flex: 1;
+    align-items: center;
+    gap: 20px;
 }
 
+
+/* ---------------- CART ICON ---------------- */
+.cart-icon {
+    position: relative;
+    font-size: 22px;
+    color: #333;
+    text-decoration: none;
+}
+
+.cart-icon:hover {
+    color: #007bff;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ff3b30;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 6px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s ease;
+}
+
+.cart-count.bump {
+    transform: scale(1.25);
+}
+
+
+/* ---------------- USER DROPDOWN ---------------- */
 .user-dropdown {
     position: relative;
     cursor: pointer;
@@ -71,123 +111,46 @@
 .user-trigger {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .user-icon {
-    font-size: 1.4rem;
+    font-size: 24px;
     color: #555;
 }
 
-/* Menu xổ xuống */
+/* Menu dropdown */
 .dropdown-menu {
     position: absolute;
-    top: 40px;
+    top: 110%;
     right: 0;
-    width: 190px;
-    background: #fff;
-    border-radius: 8px;
-    padding: 10px 0;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    display: none;
-}
-
-.user-dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: 10px 15px;
-    color: #333;
-    text-decoration: none;
-}
-
-.dropdown-menu li a:hover {
-    background: #f5f5f5;
-}
-/* ========== USER DROPDOWN ========== */
-
-.user-dropdown {
-    position: relative;
-}
-
-.user-trigger {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    padding: 8px 12px;
-}
-
-.user-icon {
-    font-size: 20px;
-}
-
-/* Dropdown menu */
-.user-dropdown .dropdown-menu {
-    position: absolute;
-    top: 40px;         /* đặt dưới trigger */
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    list-style: none;
-    padding: 10px 0;
     width: 180px;
-    opacity: 0;
-    pointer-events: none; /* không click được khi ẩn */
-    transform: translateY(10px);
-    transition: all 0.25s ease;
-    z-index: 99999;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    padding: 10px 0;
+    display: none; /* hidden mặc định */
+    z-index: 1000;
 }
 
-/* Dropdown item */
+/* Toggle bằng JS */
+.dropdown-menu.show {
+    display: block !important;
+}
+
 .dropdown-menu li {
-    padding: 8px 18px;
-}
-
-.dropdown-menu li:hover {
-    background: #f0f0f0;
+    list-style: none;
 }
 
 .dropdown-menu a {
+    display: block;
+    padding: 10px 18px;
     color: #333;
     text-decoration: none;
-    display: block;
+    transition: background 0.2s ease;
 }
 
-/* Hiển thị khi hover */
-.user-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    pointer-events: auto; /* cho phép click */
-    transform: translateY(0);
-}
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-right: 20px;
-}
-/* =============================== */
-/* FIX LOGO BookWorld = no underline */
-/* =============================== */
-
-.brand-link {
-    text-decoration: none !important;   /* Bỏ gạch chân */
-    color: #111 !important;             /* Màu mặc định */
-    display: flex;
-    align-items: center;
-}
-
-.brand-link:hover {
-    color: #0078ff !important;          /* Màu xanh hover */
-}
-
-.brand-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0;
-    padding: 0;
-    letter-spacing: 0.5px;
+.dropdown-menu a:hover {
+    background: #f5f5f5;
+    color: #007bff;
 }
