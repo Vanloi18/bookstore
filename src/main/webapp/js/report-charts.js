@@ -125,18 +125,25 @@ let orderStatusChart;
 async function drawOrderStatusChart() {
     const data = await fetchData('status');
     const canvas = document.getElementById('orderStatusChart');
-    if (!canvas || !data || !data.labels) return;
+    
+    // SỬA LỖI: Bỏ kiểm tra data.labels vì data trả về là Map
+    if (!canvas || !data) return; 
 
     const ctx = canvas.getContext('2d');
     if (orderStatusChart) orderStatusChart.destroy();
 
+    // CHUYỂN ĐỔI DỮ LIỆU TỪ MAP SANG ARRAY
+    // Backend trả về: {"Pending": 5, "Completed": 2}
+    const labels = Object.keys(data);   // -> ["Pending", "Completed"]
+    const values = Object.values(data); // -> [5, 2]
+
     orderStatusChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: data.labels,
+            labels: labels, // Dùng biến labels vừa tạo
             datasets: [{
                 label: 'Số lượng đơn hàng',
-                data: data.values,
+                data: values, // Dùng biến values vừa tạo
                 backgroundColor: '#28a745'
             }]
         },
