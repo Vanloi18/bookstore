@@ -26,7 +26,7 @@
             <a href="${pageContext.request.contextPath}/cart.jsp" class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count">
-                    <c:set var="totalQty" value="0" />
+                    <c:set var="totalQty" value="0" />	
 
                     <c:if test="${not empty sessionScope.cart}">
                         <c:forEach var="item" items="${sessionScope.cart.values()}">

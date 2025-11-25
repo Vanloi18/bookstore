@@ -1,0 +1,373 @@
+/* ========================================
+   MICRO-INTERACTIONS - APPLE STYLE
+   ======================================== */
+
+/* === RIPPLE EFFECT === */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* === SMOOTH HOVER LIFT === */
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* === BUTTON PRESS EFFECT === */
+.press-effect {
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.press-effect:active {
+    transform: scale(0.96);
+}
+
+/* === GLOW EFFECT === */
+.glow-on-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-on-hover:hover {
+    box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+}
+
+/* === SHIMMER EFFECT === */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* === BREATH ANIMATION === */
+@keyframes breath {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+.breath {
+    animation: breath 3s ease-in-out infinite;
+}
+
+/* === FLOAT ANIMATION === */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* === ROTATE ON HOVER === */
+.rotate-on-hover {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rotate-on-hover:hover {
+    transform: rotate(5deg);
+}
+
+/* === SCALE ON HOVER === */
+.scale-on-hover {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-on-hover:hover {
+    transform: scale(1.05);
+}
+
+/* === BORDER SLIDE === */
+.border-slide {
+    position: relative;
+}
+
+.border-slide::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #007AFF;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.border-slide:hover::after {
+    width: 100%;
+}
+
+/* === FADE IN UP === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === FADE IN DOWN === */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === ZOOM IN === */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === SLIDE IN LEFT === */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === SLIDE IN RIGHT === */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === BOUNCE IN === */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === FLIP IN === */
+@keyframes flipIn {
+    from {
+        opacity: 0;
+        transform: rotateY(-90deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateY(0);
+    }
+}
+
+.flip-in {
+    animation: flipIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === SHAKE === */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === ATTENTION SEEKER === */
+@keyframes attention {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 20% {
+        transform: scale(0.95) rotate(-3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale(1.05) rotate(3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale(1.05) rotate(-3deg);
+    }
+}
+
+.attention {
+    animation: attention 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === STAGGER DELAY UTILITIES === */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* === HOVER BRIGHTNESS === */
+.hover-brightness {
+    transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-brightness:hover {
+    filter: brightness(1.1);
+}
+
+/* === HOVER BLUR === */
+.hover-blur {
+    transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-blur:hover {
+    filter: blur(2px);
+}
+
+/* === FOCUS RING === */
+.focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+}
+
+/* === GRADIENT ANIMATION === */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+}
+
+/* === TEXT GRADIENT === */
+.text-gradient {
+    background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* === PERSPECTIVE HOVER === */
+.perspective-card {
+    perspective: 1000px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.perspective-card:hover {
+    transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* === GLASS MORPHISM === */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}

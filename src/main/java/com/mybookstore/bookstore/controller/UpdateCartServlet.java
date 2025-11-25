@@ -24,9 +24,9 @@ public class UpdateCartServlet extends HttpServlet {
             try {
                 int bookId = Integer.parseInt(request.getParameter("bookId"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-
+                	
                 CartItem item = cart.get(bookId);
-
+                
                 if (item != null) {
                     if (quantity > 0) {
                         // Cập nhật số lượng mới

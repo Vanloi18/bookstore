@@ -1,60 +1,139 @@
-/* ====== COMPONENT: Pagination ====== */
+/* ========================================
+   PAGINATION COMPONENT - APPLE STYLE
+   ======================================== */
+
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin: 40px 0;
-    font-family: 'Inter', sans-serif;
+    margin: 64px 0 40px;
 }
 
 .pagination ul {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 8px;
     padding: 0;
     margin: 0;
 }
 
 .pagination li {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pagination a {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: #f5f5f7;
-    color: #333;
+/* === LINK STYLES === */
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background: #fff;
+    color: #1d1d1f;
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid #ddd;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e8e8ed;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* === HOVER STATE === */
 .pagination a:hover {
-    background: #0071e3;
-    color: #fff;
-    border-color: #0071e3;
-    transform: translateY(-1px);
+    background: #f5f5f7;
+    border-color: #d1d1d6;
+    color: #007AFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.pagination .active a {
-    background: #0071e3;
+.pagination a:active {
+    transform: translateY(0);
+}
+
+/* === ACTIVE PAGE === */
+.pagination .active span {
+    background: #007AFF;
     color: #fff;
-    border-color: #0071e3;
+    border-color: #007AFF;
     cursor: default;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
 }
 
+/* === ARROW BUTTONS === */
 .pagination li:first-child a,
 .pagination li:last-child a {
     font-weight: 600;
-    background: #f9f9fb;
+    font-size: 16px;
+    min-width: 44px;
+    color: #007AFF;
 }
 
 .pagination li:first-child a:hover,
 .pagination li:last-child a:hover {
-    background: #0071e3;
+    background: #007AFF;
     color: #fff;
+    border-color: #007AFF;
+}
+
+/* === ELLIPSIS === */
+.pagination span:not(.active span) {
+    background: transparent;
+    border-color: transparent;
+    color: #86868b;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* === DISABLED STATE === */
+.pagination .disabled a {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .pagination {
+        margin: 48px 0 32px;
+    }
+    
+    .pagination a,
+    .pagination span {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 14px;
+    }
+    
+    .pagination li:first-child a,
+    .pagination li:last-child a {
+        min-width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination ul {
+        gap: 6px;
+    }
+    
+    .pagination a,
+    .pagination span {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+    
+    .pagination li:first-child a,
+    .pagination li:last-child a {
+        min-width: 36px;
+        font-size: 15px;
+    }
 }

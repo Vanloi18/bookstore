@@ -7,72 +7,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Chi Tiết Đơn Hàng | Bookstore Admin</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<body>
- <div class="container admin-container">
-        <header class="main-header">
-    <div class="logo-section">
-        <a href="${pageContext.request.contextPath}/home" class="logo-text">
-        <span class="b-part">Book</span><span class="s-part">Store</span>
-            <img src="${pageContext.request.contextPath}/images/logo_icon.jpg" alt="icon" class="logo-icon">
-        </a>
-    </div>
+<body class="admin-body">
 
-    <nav class="nav-links">
-    <a href="${pageContext.request.contextPath}/admin/dashboard">🧑‍💻TRANG ADMIN</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-books">📚 QUẢN LÝ SÁCH</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-categories">🏷️ QUẢN LÝ THỂ LOẠI</a>
-        <a href="${pageContext.request.contextPath}/admin/manage-orders">🛒 QUẢN LÝ ĐƠN HÀNG</a>
-        <a href="${pageContext.request.contextPath}/home">🏠Trang chủ</a>
-        </nav>
-    </header>
+    <div class="admin-main-content">
+    
+        <main class="admin-page-content">
+            
+            <div class="card">
+                <h1><i class="fas fa-truck-moving"></i> Chi Tiết Đơn Hàng #${orderId}</h1>
+                
+                <p class="back-link mb-20"> <a href="${pageContext.request.contextPath}/admin/manage-orders" class="text-secondary">
+                        ← Quay lại danh sách đơn hàng
+                    </a>
+                </p>
+                <hr>
 
-    <!-- Nội dung -->
-    <main class="admin-container">
-        <div class="admin-card">
-            <h1 class="admin-title">Chi Tiết Đơn Hàng #${orderId}</h1>
-            <p class="back-link">
-                <a href="${pageContext.request.contextPath}/admin/manage-orders">← Quay lại danh sách đơn hàng</a>
-            </p>
-            <hr>
-
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID Sách</th>
-                        <th>Tên Sách</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:set var="totalAmount" value="0" />
-                    <c:forEach items="${detailList}" var="detail">
-                        <tr>
-                            <td>${detail.book.id}</td>
-                            <td>${detail.book.title}</td>
-                            <td>${detail.quantity}</td>
-                            <td><fmt:formatNumber type="number" value="${detail.pricePerUnit}" /> VNĐ</td>
-                            <td><fmt:formatNumber type="number" value="${detail.quantity * detail.pricePerUnit}" /> VNĐ</td>
-                        </tr>
-                        <c:set var="totalAmount" value="${totalAmount + (detail.quantity * detail.pricePerUnit)}" />
-                    </c:forEach>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" style="text-align:right; font-weight:600;">Tổng cộng:</td>
-                        <td style="font-weight:600; color:#0078d7;">
-                            <fmt:formatNumber type="number" value="${totalAmount}" /> VNĐ
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </main>
-
-</body>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID Sách</th>
+                                <th>Tên Sách</th>
+                                <th class="text-center">Số lượng</th>
+                                <th class="text-right">Đơn giá</th>
+                                <th class="text-right">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:set var="totalAmount" value="0" />
+                            <c:forEach items="${detailList}" var="detail">
+                                <tr>
+                                    <td>${detail.book.id}</td>
+                                    <td>${detail.book.title}</td>
+                                    <td class="text-center">${detail.quantity}</td>
+                                    <td class="text-right text-secondary">
+                                        <fmt:formatNumber type="number" value="${detail.pricePerUnit}" /> VNĐ
+                                    </td>
+                                    <td class="text-right text-price"> <fmt:formatNumber type="number" value="${detail.quantity * detail.pricePerUnit}" /> VNĐ
+                                    </td>
+                                </tr>
+                                <c:set var="totalAmount" value="${totalAmount + (detail.quantity * detail.pricePerUnit)}" />
+                            </c:forEach>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-right">Tổng cộng:</td>
+                                <td class="text-right text-price"> <fmt:formatNumber type="number" value="${totalAmount}" /> VNĐ
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </main>
+        
+        </div> </body>
 </html>

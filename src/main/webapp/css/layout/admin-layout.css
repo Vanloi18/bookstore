@@ -30,16 +30,10 @@
     min-height: 100vh;
 }
 
-/* Main Content Area */
-.admin-main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    margin-left: var(--sidebar-width); 
-    transition: margin-left 0.3s ease;
-}
-
+/* ========================================================= */
 /* 1. Sidebar (Trái - admin-sidebar.jsp) */
+/* ========================================================= */
+
 .admin-sidebar {
     width: var(--sidebar-width);
     background-color: var(--color-dark);
@@ -47,11 +41,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    padding: 20px 15px; 
-    z-index: 1010;
+    height: 100vh; /* ✅ FIX: Dùng 100vh thay vì 100% để sidebar luôn full chiều cao */
+    padding: 20px 15px 80px 15px; /* ✅ FIX: Thêm padding-bottom để footer không bị che */
+    z-index: 1010; /* ✅ Cao hơn header (990) để sidebar luôn ở trên */
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    overflow-y: auto; 
+    overflow-y: auto; /* ✅ Cho phép scroll nếu menu dài */
+    overflow-x: hidden;
     transition: transform 0.3s ease;
 }
 
@@ -157,8 +152,9 @@
     position: fixed;
     top: 0;
     right: 0;
+    /* ✅ FIX: Đảm bảo header bắt đầu sau sidebar */
     left: var(--sidebar-width); 
-    z-index: 990;
+    z-index: 990; /* ✅ Thấp hơn sidebar (1010) */
     transition: left 0.3s ease;
 }
 
@@ -200,15 +196,32 @@
     margin-right: 10px;
 }
 
+/* ========================================================= */
+/* 3. Main Content Area - FIX CHE HEADER/SIDEBAR */
+/* ========================================================= */
 
-/* 3. Content Area */
+/* ✅ FIX: Container chính phải tính toán đúng khoảng trống cho sidebar */
+.admin-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /* ✅ FIX: Margin-left phải bằng sidebar width để không bị che */
+    margin-left: var(--sidebar-width); 
+    /* ✅ FIX: Padding-top để nội dung không bị che bởi header fixed */
+    padding-top: var(--topbar-height);
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+/* ✅ FIX: Content area với padding hợp lý */
 .admin-page-content {
-    /* ĐIỀU CHỈNH: Thay đổi padding để xích nội dung sang phải */
-    padding: 25px 40px; /* 25px trên/dưới, 40px trái/phải */
+    padding: 25px 40px; /* Padding trái/phải/trên/dưới */
     flex-grow: 1;
     background-color: var(--color-background-main);
-    margin-top: var(--topbar-height); 
+    /* ✅ REMOVED: margin-top không cần nữa vì đã có padding-top ở .admin-main-content */
+    /* ✅ FIX: Min-height để đảm bảo nội dung luôn đủ cao */
     min-height: calc(100vh - var(--topbar-height));
+    overflow-y: auto; /* ✅ Cho phép scroll nếu nội dung dài */
 }
 
 .admin-page-content h1 {
@@ -220,7 +233,10 @@
     padding-bottom: 10px;
 }
 
+/* ========================================================= */
 /* 4. Footer */
+/* ========================================================= */
+
 .admin-footer {
     padding: 10px 25px;
     text-align: center;
@@ -230,27 +246,49 @@
     margin-top: auto; 
 }
 
+/* ========================================================= */
+/* 5. Responsive - MOBILE & TABLET */
+/* ========================================================= */
 
-/* 5. Responsive */
 @media (max-width: 992px) {
-    /* Sidebar collapse trên mobile */
+    /* ✅ FIX: Sidebar ẩn mặc định trên mobile */
     .admin-sidebar {
         transform: translateX(-100%);
         box-shadow: none;
     }
+    
+    /* ✅ FIX: Main content chiếm full width khi sidebar ẩn */
     .admin-main-content {
         margin-left: 0;
     }
+    
+    /* ✅ FIX: Header cũng full width */
     .admin-header {
         left: 0;
     }
     
-    /* Cần thêm class này vào <body> khi nhấn nút toggle menu trên mobile */
+    /* ✅ FIX: Khi toggle sidebar (cần thêm class này vào <body> bằng JS) */
     .sidebar-toggled .admin-sidebar {
         transform: translateX(0);
         box-shadow: 2px 0 10px rgba(0,0,0,0.5);
     }
+    
+    /* ✅ FIX: Thêm overlay khi sidebar mở trên mobile */
+    .sidebar-toggled::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
 }
+
+/* ========================================================= */
+/* 6. Form Styles */
+/* ========================================================= */
 
 .form-container,
 .form-container-large {
@@ -292,6 +330,7 @@ select {
     font-size: 15px;
     font-family: var(--font-stack);
     transition: all 0.2s ease;
+    box-sizing: border-box; /* ✅ FIX: Đảm bảo width 100% tính đúng */
 }
 
 input[type="text"]:focus,
@@ -319,6 +358,7 @@ select:focus {
     font-weight: 600;
     text-align: center;
     transition: all 0.2s ease;
+    text-decoration: none; /* ✅ FIX: Nếu dùng <a> tag */
 }
 
 .btn:hover {
@@ -330,6 +370,7 @@ select:focus {
 .btn-primary {
     background: var(--color-primary);
 }
+
 .btn-primary:hover {
     background: var(--color-primary-active);
 }

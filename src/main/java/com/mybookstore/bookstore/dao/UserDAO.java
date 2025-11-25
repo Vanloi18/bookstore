@@ -17,37 +17,38 @@ public class UserDAO {
      * @param plainPassword Mật khẩu dạng văn bản thuần người dùng nhập vào.
      * @return Đối tượng User nếu đăng nhập thành công, ngược lại trả về null.
      */
-    public User checkLogin(String username, String plainPassword) {
-        String sql = "SELECT * FROM users WHERE username = ?";
-        
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+	public User checkLogin(String usernameOrEmail, String plainPassword) {
+	    String sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+	    
+	    try (Connection connection = DatabaseConnection.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, username);
+	        ps.setString(1, usernameOrEmail);
+	        ps.setString(2, usernameOrEmail);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String hashedPasswordFromDB = rs.getString("password");
-                    
-                    // Sử dụng PasswordUtil để kiểm tra mật khẩu
-                    if (PasswordUtil.checkPassword(plainPassword, hashedPasswordFromDB)) {
-                        User user = new User();
-                        user.setId(rs.getInt("id"));
-                        user.setUsername(rs.getString("username"));
-                        user.setFullname(rs.getString("fullname"));
-                        user.setEmail(rs.getString("email"));
-                        user.setAddress(rs.getString("address"));
-                        user.setPhone(rs.getString("phone"));
-                        user.setAdmin(rs.getBoolean("isAdmin"));
-                        return user;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                String hashedPassword = rs.getString("password");
+
+	                if (PasswordUtil.checkPassword(plainPassword, hashedPassword)) {
+	                    User user = new User();
+	                    user.setId(rs.getInt("id"));
+	                    user.setUsername(rs.getString("username"));
+	                    user.setFullname(rs.getString("fullname"));
+	                    user.setEmail(rs.getString("email"));
+	                    user.setAddress(rs.getString("address"));
+	                    user.setPhone(rs.getString("phone"));
+	                    user.setAdmin(rs.getBoolean("isAdmin"));
+	                    return user;
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
     
     public int countUsers() {
         // Chỉ đếm người dùng thường, không đếm admin
@@ -94,12 +95,11 @@ public class UserDAO {
         String sql = "INSERT INTO users (username, password, fullname, email, address, phone) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            // Sử dụng PasswordUtil để băm mật khẩu trước khi lưu
+        	
             String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
 
             ps.setString(1, user.getUsername());
-            ps.setString(2, hashedPassword); // Lưu mật khẩu đã được mã hóa
+            ps.setString(2, hashedPassword); 
             ps.setString(3, user.getFullname());
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getAddress());
@@ -204,7 +204,6 @@ public class UserDAO {
         // Không lấy password
         return user;
     }
- // ... (các phương thức khác)
 
     /**
      * Đếm số lượng người dùng mới (không phải admin) đăng ký trong tháng hiện tại.
@@ -223,7 +222,78 @@ public class UserDAO {
         }
         return 0;
     }
-    
-// ... (các phương thức khác)
+ // Thêm các phương thức này vào cuối class UserDAO.java hiện tại
+
+    /**
+     * Tìm người dùng qua email để gửi link reset.
+     */
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToUser(rs); // Sử dụng lại hàm helper có sẵn
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Lưu token reset password và thời gian hết hạn (15 phút).
+     */
+    public void updateResetToken(String email, String token) {
+        String sql = "UPDATE users SET reset_token = ?, token_expiry = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE email = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, token);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Kiểm tra token có hợp lệ và còn hạn không.
+     */
+    public User getByResetToken(String token) {
+        String sql = "SELECT * FROM users WHERE reset_token = ? AND token_expiry > NOW()";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, token);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToUser(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Cập nhật mật khẩu mới (có mã hóa BCrypt) và xóa token.
+     */
+    public void updatePassword(String email, String newPassword) {
+        String sql = "UPDATE users SET password = ?, reset_token = NULL, token_expiry = NULL WHERE email = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            
+            // QUAN TRỌNG: Mã hóa mật khẩu trước khi lưu để đồng bộ với chức năng Login
+            String hashedPassword = PasswordUtil.hashPassword(newPassword);
+            
+            ps.setString(1, hashedPassword);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

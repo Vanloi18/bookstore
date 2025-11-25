@@ -25,29 +25,29 @@
                 <p class="error-message">${errorMessage}</p>
             </c:if>
 
-            <form action="register" method="post">
+             <form action="register" method="post">
                 <div class="form-group">
-                    <label for="username">Tên đăng nhập:</label>
+                    <label class ="form-label" for="username">Tên đăng nhập:</label>
                     <input type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Mật khẩu:</label>
+                    <label class ="form-label" for="password">Mật khẩu:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="fullname">Họ và tên:</label>
+                    <label class ="form-label" for="fullname">Họ và tên:</label>
                     <input type="text" id="fullname" name="fullname">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label class ="form-label" for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="address">Địa chỉ:</label>
+                    <label class ="form-label" for="address">Địa chỉ:</label>
                     <input type="text" id="address" name="address">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Số điện thoại:</label>
+                    <label class ="form-label" for="phone">Số điện thoại:</label>
                     <input type="text" id="phone" name="phone">
                 </div>
                 <button type="submit">Đăng Ký</button>

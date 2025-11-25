@@ -1,118 +1,437 @@
-/* ================================
-   LOGIN PAGE STYLES
-   ================================ */
+/* ========================================
+   LOGIN PAGE - APPLE STYLE
+   ======================================== */
+
+/* === BODY & BACKGROUND === */
 body {
-    background: linear-gradient(to bottom right, #f8f9fa, #eef1f5);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #333;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: #fafafa;
+    color: #1d1d1f;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Căn giữa nội dung chính */
+/* === MAIN CONTENT === */
 .main-content {
-    min-height: 70vh;
+    min-height: calc(100vh - 160px);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 15px;
+    padding: 60px 20px;
 }
 
-/* Khung form */
+/* === FORM CONTAINER === */
 .form-container {
     background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    padding: 50px 40px;
-    max-width: 420px;
+    border-radius: 20px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.06);
+    padding: 64px 48px;
+    max-width: 440px;
     width: 100%;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .form-container:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Tiêu đề */
+/* === LOGO AREA === */
+.form-logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #007AFF;
+}
+
+/* === TITLE === */
 .form-container h2 {
-    margin-bottom: 30px;
-    color: #222;
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 600;
+    color: #1d1d1f;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
-/* Form group */
-.form-group {
+/* === SUBTITLE === */
+.form-subtitle {
+    font-size: 17px;
+    color: #86868b;
+    margin: 0 0 40px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* === FORM === */
+form {
     text-align: left;
+}
+
+/* === FORM GROUP === */
+.form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
+    font-size: 14px;
     font-weight: 500;
-    color: #555;
+    color: #1d1d1f;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
 }
 
-.form-group input {
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
     width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #ccc;
+    padding: 14px 16px;
+    font-size: 17px;
+    border: 1px solid #d1d1d6;
     border-radius: 12px;
-    font-size: 15px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #fff;
+    color: #1d1d1f;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+
+.form-group input::placeholder {
+    color: #86868b;
+}
+
+.form-group input:hover {
+    border-color: #b0b0b5;
 }
 
 .form-group input:focus {
-    border-color: #0071e3; /* màu xanh Apple */
-    box-shadow: 0 0 0 3px rgba(0,113,227,0.2);
     outline: none;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
 }
 
-/* Nút đăng nhập */
+/* === CHECKBOX REMEMBER ME === */
+.form-group.checkbox-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.form-group.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #007AFF;
+}
+
+.form-group.checkbox-group label {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1d1d1f;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* === SUBMIT BUTTON === */
 button[type="submit"] {
     width: 100%;
-    background: linear-gradient(135deg, #0071e3, #0096f7);
+    background: #007AFF;
     color: #fff;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
-    padding: 12px;
+    padding: 16px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.01em;
 }
 
 button[type="submit"]:hover {
-    background: linear-gradient(135deg, #005bb5, #0081dc);
-    transform: translateY(-2px);
+    background: #0051D5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
 }
 
-/* Thông báo lỗi */
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+/* === ERROR MESSAGE === */
 .error-message {
-    color: #d93025;
-    background: #fdecea;
+    background: #FFE5E5;
+    color: #FF3B30;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 16px;
     border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 15px;
-    font-size: 14px;
+    margin-bottom: 24px;
+    text-align: left;
+    border: 1px solid rgba(255, 59, 48, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Liên kết đăng ký */
-.form-container p {
-    margin-top: 25px;
-    font-size: 14px;
-    color: #555;
+.error-message::before {
+    content: "⚠";
+    font-size: 18px;
+    flex-shrink: 0;
 }
 
-.form-container a {
-    color: #0071e3;
+/* === SUCCESS MESSAGE === */
+.success-message {
+    background: #E5F8ED;
+    color: #34C759;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    text-align: left;
+    border: 1px solid rgba(52, 199, 89, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.success-message::before {
+    content: "✓";
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* === FORGOT PASSWORD LINK === */
+.forgot-password {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.forgot-password a {
+    color: #007AFF;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.forgot-password a:hover {
+    color: #0051D5;
+}
+
+/* === REGISTER LINK === */
+.form-container > p {
+    margin-top: 32px;
+    font-size: 15px;
+    color: #86868b;
+    line-height: 1.5;
+}
+
+.form-container > p a {
+    color: #007AFF;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s;
 }
 
-.form-container a:hover {
-    text-decoration: underline;
+.form-container > p a:hover {
+    color: #0051D5;
+}
+
+/* === DIVIDER === */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 32px 0;
+    color: #86868b;
+    font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e8e8ed;
+}
+
+.divider::before {
+    margin-right: 16px;
+}
+
+.divider::after {
+    margin-left: 16px;
+}
+
+/* === SOCIAL LOGIN BUTTONS === */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border: 1px solid #d1d1d6;
+    border-radius: 12px;
+    background: #fff;
+    color: #1d1d1f;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.social-btn:hover {
+    background: #f5f5f7;
+    border-color: #b0b0b5;
+}
+
+.social-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* === LOADING STATE === */
+button[type="submit"].loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+button[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 40px 16px;
+        min-height: calc(100vh - 120px);
+    }
+    
+    .form-container {
+        padding: 48px 32px;
+    }
+    
+    .form-container h2 {
+        font-size: 28px;
+    }
+    
+    .form-subtitle {
+        font-size: 15px;
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 40px 24px;
+        border-radius: 16px;
+    }
+    
+    .form-container h2 {
+        font-size: 24px;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"] {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+    
+    button[type="submit"] {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === INPUT VALIDATION STATES === */
+.form-group input.error {
+    border-color: #FF3B30;
+}
+
+.form-group input.error:focus {
+    box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.1);
+}
+
+.form-group input.success {
+    border-color: #34C759;
+}
+
+.form-group input.success:focus {
+    box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.1);
+}
+
+.field-error {
+    color: #FF3B30;
+    font-size: 13px;
+    margin-top: 6px;
+    display: block;
+}
+
+.field-success {
+    color: #34C759;
+    font-size: 13px;
+    margin-top: 6px;
+    display: block;
 }

@@ -34,19 +34,30 @@ public class AddToCartServlet extends HttpServlet {
             cart = new HashMap<>();
         }
 
+        response.setContentType("text/plain");
+        
         try {
             int bookId = Integer.parseInt(request.getParameter("bookId"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            int quantityToAdd = Integer.parseInt(request.getParameter("quantity"));
 
             Book book = bookDAO.getBookById(bookId);
 
-            if (book != null && quantity > 0) {
-                CartItem cartItem = cart.get(bookId);
+            if (book != null && quantityToAdd > 0) {
+                // Lấy số lượng hiện có trong giỏ
+                CartItem existingItem = cart.get(bookId);
+                int currentInCart = (existingItem != null) ? existingItem.getQuantity() : 0;
+                
+                // === FIX: KIỂM TRA TỒN KHO ===
+                if (currentInCart + quantityToAdd > book.getStock()) {
+                    // Trả về -1 để báo lỗi hết hàng (Front-end cần xử lý số này nếu muốn hiển thị alert)
+                    response.getWriter().write("-1"); 
+                    return;
+                }
 
-                if (cartItem != null) {
-                    cartItem.setQuantity(cartItem.getQuantity() + quantity);
+                if (existingItem != null) {
+                    existingItem.setQuantity(currentInCart + quantityToAdd);
                 } else {
-                    cart.put(bookId, new CartItem(book, quantity));
+                    cart.put(bookId, new CartItem(book, quantityToAdd));
                 }
             }
 
@@ -58,11 +69,10 @@ public class AddToCartServlet extends HttpServlet {
                 totalItems += item.getQuantity();
             }
 
-            response.setContentType("text/plain");
             response.getWriter().write(String.valueOf(totalItems));
 
         } catch (Exception e) {
-            response.setContentType("text/plain");
+            e.printStackTrace();
             response.getWriter().write("0");
         }
     }

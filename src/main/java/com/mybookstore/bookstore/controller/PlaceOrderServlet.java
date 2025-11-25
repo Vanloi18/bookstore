@@ -31,17 +31,18 @@ public class PlaceOrderServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         
+        // Cần khởi tạo BookDAO để gọi hàm trừ kho
+        com.mybookstore.bookstore.dao.BookDAO bookDAO = new com.mybookstore.bookstore.dao.BookDAO();
+        
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         @SuppressWarnings("unchecked")
         Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
 
-        // Kiểm tra điều kiện
         if (loggedInUser == null || cart == null || cart.isEmpty()) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        // Lấy thông tin từ form
         String shippingAddress = request.getParameter("shippingAddress");
 
         // 1. Tính tổng tiền
@@ -50,16 +51,16 @@ public class PlaceOrderServlet extends HttpServlet {
             totalAmount += item.getSubtotal();
         }
  
-        // 2. Tạo đối tượng Order và lưu vào CSDL
+        // 2. Lưu Order
         Order order = new Order();
         order.setUserId(loggedInUser.getId());
         order.setTotalAmount(totalAmount);
         order.setShippingAddress(shippingAddress);
-        order.setStatus("Pending"); // Trạng thái chờ xử lý
+        order.setStatus("Pending"); 
 
         int generatedOrderId = orderDAO.addOrder(order);
 
-        // 3. Lưu chi tiết đơn hàng (từng sản phẩm) vào CSDL
+        // 3. Lưu OrderDetail VÀ Trừ tồn kho
         if (generatedOrderId != -1) {
             for (CartItem item : cart.values()) {
                 OrderDetail detail = new OrderDetail();
@@ -67,16 +68,22 @@ public class PlaceOrderServlet extends HttpServlet {
                 detail.setBookId(item.getBook().getId());
                 detail.setQuantity(item.getQuantity());
                 detail.setPricePerUnit(item.getBook().getPrice());
+                
+                // Lưu chi tiết đơn hàng
                 orderDetailDAO.addOrderDetail(detail);
                 
-                // (Nâng cao) Ở đây bạn có thể gọi BookDAO để trừ số lượng tồn kho
+                // === FIX: TRỪ TỒN KHO ===
+                boolean updateSuccess = bookDAO.updateStock(item.getBook().getId(), item.getQuantity());
+                if (!updateSuccess) {
+                    // Nếu trừ kho thất bại (do hết hàng giữa chừng), log lại lỗi
+                    System.out.println("Lỗi: Không thể trừ kho cho sách ID: " + item.getBook().getId());
+                    // Trong thực tế, bạn có thể cần rollback transaction ở đây
+                }
             }
         }
 
-        // 4. Xóa giỏ hàng khỏi session
+        // 4. Xóa giỏ hàng & Redirect
         session.removeAttribute("cart");
-
-        // 5. Chuyển hướng đến trang cảm ơn
         response.sendRedirect("order-success.jsp");
     }
 }

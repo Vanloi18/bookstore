@@ -286,5 +286,36 @@ public void deleteBook(int bookId) {
      e.printStackTrace();
  }
 }
-
+//============================
+// CẬP NHẬT: TRỪ TỒN KHO KHI MUA
+// ============================
+public boolean updateStock(int bookId, int quantitySold) {
+    // Chỉ trừ khi số lượng tồn >= số lượng bán
+    String sql = "UPDATE books SET stock = stock - ? WHERE id = ? AND stock >= ?";
+    
+    try (Connection connection = DatabaseConnection.getConnection();
+         PreparedStatement ps = connection.prepareStatement(sql)) {
+        
+        ps.setInt(1, quantitySold); // Trừ đi số lượng bán
+        ps.setInt(2, bookId);       // Theo ID sách
+        ps.setInt(3, quantitySold); // Điều kiện: stock phải đủ để trừ
+        
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected > 0; // Trả về true nếu trừ thành công
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+//Đếm số sách sắp hết hàng (Stock <= 5)
+public int countLowStockBooks() {
+    String sql = "SELECT COUNT(*) FROM books WHERE stock <= 5";
+    try (Connection connection = DatabaseConnection.getConnection();
+         PreparedStatement ps = connection.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        if (rs.next()) return rs.getInt(1);
+    } catch (SQLException e) { e.printStackTrace(); }
+    return 0;
+}
 }

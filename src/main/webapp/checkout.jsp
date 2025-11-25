@@ -65,15 +65,15 @@
                         <h3>🚚 Thông tin giao hàng</h3>
                         <form action="place-order" method="post" class="checkout-form">
                             <div class="form-group">
-                                <label>👤 Họ và tên người nhận:</label>
-                                <input type="text" value="${loggedInUser.fullname}" readonly>
+                                <label class ="form-label">👤 Họ và tên người nhận:</label>
+                                <input type="text" value="${loggedInUser.fullname}" required>
                             </div>
                             <div class="form-group">
-                                <label>📧 Email:</label>
-                                <input type="email" value="${loggedInUser.email}" readonly>
+                                <label class ="form-label">📧 Email:</label>
+                                <input type="email" value="${loggedInUser.email}" required>
                             </div>
                             <div class="form-group">
-                                <label for="shippingAddress">🏠 Địa chỉ giao hàng:</label>
+                                <label class ="form-label" for="shippingAddress">🏠 Địa chỉ giao hàng:</label>
                                 <textarea name="shippingAddress" id="shippingAddress" rows="4" required>${loggedInUser.address}</textarea>
                             </div>
                             <button type="submit" class="btn-submit">✅ Đặt Hàng Ngay</button>

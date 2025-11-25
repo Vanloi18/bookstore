@@ -9,7 +9,8 @@ public class Order {
     private double totalAmount;
     private String shippingAddress;
     private String status;
-
+    private String userName;
+    
     public Order() {}
 
     // Getters and Setters
@@ -25,4 +26,10 @@ public class Order {
     public void setShippingAddress(String shippingAddress) { this.shippingAddress = shippingAddress; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

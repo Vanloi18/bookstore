@@ -20,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8"); // Hỗ trợ tiếng Việt
+        request.setCharacterEncoding("UTF-8"); 
         
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
@@ -29,13 +29,13 @@ public class RegisterServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         
-        // Kiểm tra xem username đã tồn tại chưa
+        
         if (userDAO.isUsernameExists(username)) {
-            // Nếu đã tồn tại, gửi lỗi về trang register.jsp
+            
             request.setAttribute("errorMessage", "Tên đăng nhập đã tồn tại!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
-            // Nếu chưa, tạo người dùng mới và thêm vào CSDL
+            
             User newUser = new User();
             newUser.setUsername(username);
             newUser.setPassword(pass); 
@@ -46,7 +46,6 @@ public class RegisterServlet extends HttpServlet {
             
             userDAO.addUser(newUser);
             
-            // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
             response.sendRedirect("login.jsp");
         }
     }

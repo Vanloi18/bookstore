@@ -1,88 +1,281 @@
-/* ========================================================= */
-/* orders.css - CSS riêng cho trang Quản lý Đơn hàng */
-/* ========================================================= */
+/* =========================================
+   ORDERS PAGE STYLES - APPLE DASHBOARD
+   ========================================= */
 
-.admin-page-content h2 i {
-    color: #495057;
-    margin-right: 10px;
-}
-
-/* Thanh Lọc/Tìm kiếm */
-.table-filter-bar {
+/* --- Page Header --- */
+.page-header {
     display: flex;
-    justify-content: flex-start; /* Dồn về bên trái */
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.header-title h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin: 0;
+}
+
+.badge-count {
+    background-color: #e5e5ea;
+    color: #8e8e93;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+/* --- Filter Toolbar --- */
+.filter-toolbar {
+    background: white;
     padding: 15px 20px;
-    background-color: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.filter-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.search-group {
+    position: relative;
+    flex-grow: 1; /* Search box dài ra */
+    max-width: 400px;
+}
+
+.modern-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #d2d2d7;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    font-size: 14px;
+    transition: all 0.2s;
 }
 
-.table-filter-bar .input-search {
-    width: 300px;
+.modern-input:focus {
+    border-color: #0071e3;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,113,227,0.1);
 }
 
-.status-select {
-    /* Style chung đã có (padding, border-radius, font-size...) */
-    border: none; /* Bỏ border để Select Box nhìn như một badge */
-    color: white; /* Màu chữ trắng cho dễ đọc */
-    padding: 6px 10px;
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
 }
 
-.table-filter-bar .filter-status-select {
+/* Custom Select Group */
+.select-group {
+    position: relative;
     width: 200px;
-    /* Dùng style form-input từ form.css */
 }
 
-/* Căn chỉnh Text trong bảng */
-.data-table .text-address {
-    font-size: 0.9em;
-    color: #6c757d;
+.modern-select {
+    width: 100%;
+    appearance: none;
+    padding: 10px 30px 10px 15px;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-.data-table .status-cell {
-    /* Đảm bảo Select Box nằm gọn */
-    padding-top: 5px;
-    padding-bottom: 5px;
+.select-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    font-size: 12px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .table-filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-    .table-filter-bar .input-search,
-    .table-filter-bar .filter-status-select {
-        width: 100%;
-    }
+/* --- Table Styles --- */
+.table-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    overflow: hidden;
+    padding: 5px;
 }
-/* 1. Chờ xử lý (Pending) */
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table th {
+    text-align: left;
+    padding: 18px 20px;
+    color: #86868b;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modern-table td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f2f2f7;
+    font-size: 14px;
+    color: #1d1d1f;
+}
+
+.modern-table tr:last-child td {
+    border-bottom: none;
+}
+
+.modern-table tr:hover {
+    background-color: #fafafa;
+}
+
+/* Column Specific Styles */
+.order-id-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.id-hash {
+    font-weight: 700;
+    color: #0071e3;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+.order-date {
+    font-size: 12px;
+    color: #86868b;
+    margin-top: 2px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar-mini {
+    width: 30px;
+    height: 30px;
+    background: #f2f2f7;
+    color: #0071e3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.address-text {
+    color: #424245;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.address-text i {
+    color: #999;
+}
+
+.price-tag {
+    font-weight: 600;
+    color: #1d1d1f;
+}
+
+/* --- STATUS BADGE SELECT --- */
+.status-badge {
+    appearance: none; /* Ẩn mũi tên mặc định */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    width: 110px;
+    transition: all 0.2s;
+}
+
+/* Status Colors */
 .status-Pending {
-    background-color: #ffc107; /* Vàng */
-    color: #333; /* Chữ đen/xám cho nền vàng */
+    background-color: #FFF4E5;
+    color: #FF9500; /* Orange */
 }
 
-/* 2. Đang giao (Shipping) */
 .status-Shipping {
-    background-color: #007bff; /* Xanh dương */
+    background-color: #E5F1FF;
+    color: #0071e3; /* Blue */
 }
 
-/* 3. Hoàn thành (Completed) */
 .status-Completed {
-    background-color: #28a745; /* Xanh lá */
+    background-color: #E6F9EE;
+    color: #34C759; /* Green */
 }
 
-/* 4. Đã hủy (Cancelled) */
 .status-Cancelled {
-    background-color: #dc3545; /* Đỏ */
+    background-color: #FFF0F1;
+    color: #FF3B30; /* Red */
 }
 
-/* ⚠️ Quan trọng: Đảm bảo các options bên trong không bị đổi màu font */
-.status-select option {
-    color: #333; /* Chữ đen mặc định cho option */
-    background-color: white; 
+.status-badge:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* --- Action Button --- */
+.btn-view-detail {
+    text-decoration: none;
+    color: #86868b;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-view-detail:hover {
+    color: #0071e3;
+    background-color: #f2f2f7;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: #999;
+}
+/* --- USER INFO STYLING --- */
+.user-sub-id {
+	color: #000000 !important;
+}
+.user-name {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    
+    /* 👇 Dùng màu đen đậm (#000) và thêm !important để chắc chắn nó đè lên các màu khác */
+    color: #000000 !important; 
+    
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+/* Khi di chuột vào thì chuyển sang màu xanh để biết là bấm được */
+.user-name:hover {
+    color: #0071e3 !important;
+    text-decoration: underline;
 }

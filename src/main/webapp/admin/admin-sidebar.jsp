@@ -3,15 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <aside class="admin-sidebar">
-    <%-- 1. Tiêu đề/Logo --%>
     <div class="sidebar-header">
-        <i class="fas fa-book-open logo-icon"></i>
+        <i class="fas fa-book logo-icon"></i>
         <h2>Bookstore Admin</h2>
     </div>
 
     <%-- 2. Menu chính --%>
-    <nav class="sidebar-nav">
-        <ul class="main-menu">
+    <ul class="main-menu">
+
             <%-- Đặt class 'active' lên thẻ <li> để dễ dàng style toàn bộ dòng --%>
             <li class="${param.activePage == 'dashboard' ? 'active' : ''}">
                 <a href="${pageContext.request.contextPath}/admin/dashboard">
@@ -49,7 +48,6 @@
                 </a>
             </li>
         </ul>
-    </nav>
     
     <%-- 3. Mục hành động phụ (Đăng xuất) --%>
     <div class="sidebar-footer">

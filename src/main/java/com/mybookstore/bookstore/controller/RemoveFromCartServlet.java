@@ -22,7 +22,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 
         if (cart != null) {
             try {
-                // Lấy id của sách cần xóa từ parameter
+                // Lấy id của sách cần xóa
                 int bookId = Integer.parseInt(request.getParameter("id"));
                 
                 // Xóa sản phẩm khỏi map
